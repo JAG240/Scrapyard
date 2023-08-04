@@ -5,54 +5,82 @@ using UnityEngine.InputSystem;
 
 namespace Scrapyard.core.character
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : Player
     {
         [SerializeField] private bool allowMovement = true;
 
-        private CharacterController characterController;
-        private Player player;
+        private CharacterController _characterController;
 
-        private Vector2 rawInput;
-        private Vector2 controllerInput;
+        private Vector2 _rawMove;
+        private Vector2 _controllerMove;
+
+        private Vector3 _mousePos;
+        private float _timeCount = 0.0f;
+
+        public Transform overrideLookTo;
 
         private void Awake()
         {
-            characterController = GetComponent<CharacterController>();
-            player = GetComponent<Player>();
+            _characterController = GetComponent<CharacterController>();
         }
 
         private void Update()
         {
             Move();
+            Rotate();
+        }
+
+        private void Rotate()
+        {
+            if (Input.mousePosition == _mousePos && overrideLookTo == null)
+                return;
+
+            _mousePos = Input.mousePosition;
+
+
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if(Physics.Raycast(ray, out hit, 100))
+            {
+                float angle = overrideLookTo == null ? AngleBetweenPoints(hit.point, transform.position) : AngleBetweenPoints(overrideLookTo.position, transform.position);
+                Quaternion dest = Quaternion.Euler(new Vector3(0f, angle, 0f));
+                transform.rotation = Quaternion.Slerp(transform.rotation, dest, _timeCount);
+                _timeCount = _timeCount + Time.deltaTime;
+            }
+        }
+
+        private float AngleBetweenPoints(Vector3 a, Vector3 b) 
+        { 
+            return Mathf.Atan2(a.x - b.x, a.z - b.z) * Mathf.Rad2Deg; 
         }
 
         private void Move()
         {
-            if (!characterController.enabled)
+            if (!_characterController.enabled)
                 return;
 
-            Vector3 dir = new Vector3(controllerInput.x, 0, controllerInput.y).normalized;
-            characterController.Move(dir * player.speed * Time.deltaTime);
+            Vector3 dir = new Vector3(_controllerMove.x, 0, _controllerMove.y).normalized;
+            _characterController.Move(dir * speed * Time.deltaTime);
         }
 
         public void OnMove(InputValue value)
         {
             Vector2 input = value.Get<Vector2>();
-            rawInput = input;
+            _rawMove = input;
 
             if (allowMovement)
-                controllerInput = input;
+                _controllerMove = input;
         }
 
         public void DisableMovement()
         {
-            controllerInput = Vector2.zero;
+            _controllerMove = Vector2.zero;
             allowMovement = false;
         }
 
         public void EnableMovement()
         {
-            controllerInput = rawInput;
+            _controllerMove = _rawMove;
             allowMovement = true;
         }
     }
