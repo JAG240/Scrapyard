@@ -13,6 +13,8 @@ namespace Scrapyard.services
         {
             //Initialize any services that are needed in the order needed here
 
+            Instantiate(Resources.Load("Services/Console"));
+
             Destroy(gameObject);
         }
     }

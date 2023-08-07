@@ -60,6 +60,11 @@ namespace Scrapyard.core.character
                 return;
 
             Vector3 dir = new Vector3(_controllerMove.x, 0, _controllerMove.y).normalized;
+
+            Vector3 rawCamForward = Camera.main.transform.forward;
+            Vector3 cameraForward = Vector3.Normalize(new Vector3(rawCamForward.x, 0f, rawCamForward.z));
+
+            dir = Camera.main.transform.right * dir.x + cameraForward * dir.z;
             _characterController.Move(dir * speed * Time.deltaTime);
         }
 

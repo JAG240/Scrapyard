@@ -1,5 +1,9 @@
+using UnityEngine;
+
 public static class CustomMathFunctions
 {
+    public static readonly float Tau = 2 * Mathf.PI;
+
     public static float Lerp(float a, float b, float t)
     {
         return (1.0f - t) * a + b * t;

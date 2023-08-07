@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Scrapyard.core.character
 {
-    [CreateAssetMenu(fileName = "CharacterAttributes", menuName = "Characters/CharacterAttributes", order = 1)]
+    [CreateAssetMenu(fileName = "CharacterAttributes", menuName = "Characters/New Character Attributes", order = 1)]
     public class CharacterAttributes : ScriptableObject
     {
         [field: SerializeField] public float maxHealth { get; private set; }

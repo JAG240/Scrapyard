@@ -10,7 +10,7 @@ namespace Scrapyard.services
 
         public static void Register<T>(object serviceInstance)
         {
-            if (Services[typeof(T)] != null)
+            if (Services.ContainsKey(typeof(T)))
                 Debug.LogError($"Attempting to register more than one service type: {typeof(T)}");
 
             Services[typeof(T)] = serviceInstance;

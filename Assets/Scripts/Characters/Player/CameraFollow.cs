@@ -3,41 +3,62 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform _player;
-    [SerializeField] private Vector3 _offset;
-    [SerializeField] [Range(1f, 2f)] private float _zoom;
     [SerializeField] private float _minSpeed = 2f;
     [SerializeField] private float _maxSpeed = 6f;
     [SerializeField] private float _maxDistance = 1.5f;
+    [SerializeField] private float _zoom = 8f;
+    [SerializeField] [Range(0, 1)] private float rotation;
 
     private float _defaultDist;
+    private Vector3 _dest;
+    private float _previousRotation;
+    private float _previousZoom;
 
-    private void Start()
-    {
-        UpdateZoom();
-    }
+    private Quaternion targetRot;
 
     private void Update()
     {
-        Vector3 dest = _player.position + (_offset * _zoom);
+        ApplyRotation();
+        SmoothFollow();
+    }
 
-        if (dest == transform.position)
+    private void SmoothFollow()
+    {
+        if (_dest == transform.position)
             return;
+
+        _defaultDist = Vector3.Distance(_dest, _player.position);
 
         float dist = Mathf.Abs(Vector3.Distance(transform.position, _player.position) - _defaultDist);
         float cameraSpeed = CustomMathFunctions.remap(0f, _maxDistance, _minSpeed, _maxSpeed, dist);
 
         float step = cameraSpeed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, dest, step);
+        transform.position = Vector3.MoveTowards(transform.position, _dest, step);
 
-        if(Vector3.Distance(transform.position, dest) <= 0.001f)
+        if (Vector3.Distance(transform.position, _dest) <= 0.001f)
         {
-            transform.position = dest;
+            transform.position = _dest;
         }
     }
 
-    private void UpdateZoom()
+    private void ApplyRotation()
     {
-        transform.position = _player.position + (_offset * _zoom);
-        _defaultDist = Vector3.Distance(transform.position, _player.position);
+
+        float degPos = rotation * CustomMathFunctions.Tau;
+        _dest = new Vector3(Mathf.Cos(degPos) * _zoom + _player.position.x, transform.position.y, Mathf.Sin(degPos) * _zoom + _player.position.z);
+
+        if ((_previousRotation != rotation || targetRot != transform.rotation) || _zoom != _previousZoom)
+        {
+            SmoothLookAt();
+            _previousRotation = rotation;
+            _previousZoom = _zoom;
+        }
+
+    }
+
+    private void SmoothLookAt()
+    {
+        targetRot = Quaternion.LookRotation(_player.position - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 5f * Time.deltaTime);
     }
 }
