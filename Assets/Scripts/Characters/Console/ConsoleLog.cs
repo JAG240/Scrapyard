@@ -1,4 +1,4 @@
-namespace Scrapyard.services 
+namespace Scrapyard.services
 {
     public enum LogType
     {

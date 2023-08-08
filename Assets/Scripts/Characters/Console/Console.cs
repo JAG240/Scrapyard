@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Scrapyard.core.character;
 
 namespace Scrapyard.services
 {
@@ -60,9 +61,15 @@ namespace Scrapyard.services
             Log(LogType.LOG, command);
             commandConsole.text = string.Empty;
             commandConsole.ActivateInputField();
-            logPanel.localPosition = new Vector3(logPanel.localPosition.x, logPanel.sizeDelta.y - 200f, logPanel.localPosition.z);
+            logPanel.localPosition = new Vector3(logPanel.localPosition.x, logPanel.sizeDelta.y - 100f, logPanel.localPosition.z);
 
             //TODO: Write command handler
+            if (command == "GiveWeapon")
+            {
+                GameObject.Find("Player").GetComponent<Character>().inventory.GiveWeapon();
+            }
+            else if (command == "ShowWeapon")
+                Log(LogType.LOG, GameObject.Find("Player").GetComponent<Character>().inventory.primaryWeapon.bluntDamage.ToString());
         }
     }
 }

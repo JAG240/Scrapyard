@@ -1,5 +1,12 @@
 namespace Scrapyard.items.weapons
 {
+    public enum WeaponType 
+    { 
+        Gun,
+        Melee
+    }
+
+
     public enum WeaponPartType
     {
         GRIP,
@@ -9,7 +16,8 @@ namespace Scrapyard.items.weapons
 
     public enum WeaponBaseType
     {
-        HILT,
+        SWORD,
+        BAT,
         PISTOL,
         SHOTGUN,
         RIFLE,
@@ -18,6 +26,7 @@ namespace Scrapyard.items.weapons
 
     public enum AmmoType
     {
+        NONE,
         SCREW,
         NUT
     }

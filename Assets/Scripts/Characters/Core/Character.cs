@@ -16,6 +16,7 @@ namespace Scrapyard.core.character
 
         public float health { get; private set; } = 1;
         public float stamina { get; private set; } = 1;
+        public CharacterInventory inventory { get; private set; } = new CharacterInventory(12);
 
         protected virtual void Start()
         {
