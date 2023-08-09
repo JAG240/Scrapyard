@@ -1,6 +1,6 @@
 # Scrapyard
 After sending out a small demo/play test for another game called "<a href="https://yippika.itch.io/chops-butcher-shop?password=ShiftToRun">Chops Butcher shop</a>," I have embarked on another game idea. The goals of this
-game are to implement more better orgaized and testable code. For clarity, I do still intend to revisit the older project and bring it to full closure. 
+game are to implement better orgaized and testable code. For clarity, I do still intend to revisit the older project and bring it to full closure. 
 
 <h2>The Plan</h1>
 The way I plan to achieve this is by implementing a couple rules. 
