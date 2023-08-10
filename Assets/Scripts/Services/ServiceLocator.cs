@@ -9,12 +9,15 @@ namespace Scrapyard.services
     {
         private static readonly Dictionary<Type, object> Services = new Dictionary<Type, object>();
 
+        public static event Action<string> serviceRegistered;
+
         public static void Register<T>(object serviceInstance)
         {
             if (Services.ContainsKey(typeof(T)))
                 Debug.LogError($"Attempting to register more than one service type: {typeof(T)}");
 
             Services[typeof(T)] = serviceInstance;
+            serviceRegistered?.Invoke(typeof(T).Name);
         }
 
         public static T Resolve<T>()

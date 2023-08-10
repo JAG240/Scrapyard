@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47ba275b1e1f09f438faef546c0bddd4, type: 3}
-  m_Name: Split Barrel
+  m_Script: {fileID: 11500000, guid: 16f155c812ee25249af0df762f502f61, type: 3}
+  m_Name: Default Melee
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
   <bluntDamage>k__BackingField: 0
@@ -19,5 +19,6 @@ MonoBehaviour:
   <reloadSpeed>k__BackingField: 0
   <modSlots>k__BackingField: 0
   <type>k__BackingField: 1
-  <model>k__BackingField: {fileID: 8275991850860724156, guid: 41c14f8847f96a142bd58fd01ed6c5ee, type: 3}
-  <baseTypes>k__BackingField: 02000000030000000400000005000000
+  <baseType>k__BackingField: 0
+  <ammoType>k__BackingField: 0
+  <model>k__BackingField: {fileID: 4211551774277281977, guid: 801ed5644e6929e4b89ccd242a235f43, type: 3}

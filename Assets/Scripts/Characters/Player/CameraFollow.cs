@@ -30,7 +30,7 @@ public class CameraFollow : MonoBehaviour
         _defaultDist = Vector3.Distance(_dest, _player.position);
 
         float dist = Mathf.Abs(Vector3.Distance(transform.position, _player.position) - _defaultDist);
-        float cameraSpeed = CustomMathFunctions.remap(0f, _maxDistance, _minSpeed, _maxSpeed, dist);
+        float cameraSpeed = CustomFunctions.remap(0f, _maxDistance, _minSpeed, _maxSpeed, dist);
 
         float step = cameraSpeed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, _dest, step);
@@ -44,7 +44,7 @@ public class CameraFollow : MonoBehaviour
     private void ApplyRotation()
     {
 
-        float degPos = rotation * CustomMathFunctions.Tau;
+        float degPos = rotation * CustomFunctions.Tau;
         _dest = new Vector3(Mathf.Cos(degPos) * _zoom + _player.position.x, transform.position.y, Mathf.Sin(degPos) * _zoom + _player.position.z);
 
         if ((_previousRotation != rotation || targetRot != transform.rotation) || _zoom != _previousZoom)

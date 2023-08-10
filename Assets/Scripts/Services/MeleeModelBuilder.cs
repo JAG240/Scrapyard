@@ -5,21 +5,23 @@ using Scrapyard.items.weapons;
 
 namespace Scrapyard.services.modelbuilders
 {
-    public class MeleeModelBuilder
+    public class MeleeModelBuilder : ModelBuilder
     {
         private WeaponBuilder _weaponBuilder;
 
-        public MeleeModelBuilder(WeaponBuilder weaponBuilder)
+        public MeleeModelBuilder()
         {
-            _weaponBuilder = weaponBuilder;
+            type = WeaponType.Melee;
         }
 
-        public GameObject Build(Weapon weapon)
+        public override GameObject Build(WeaponBuilder weaponBuilder, Weapon weapon)
         {
+            _weaponBuilder = weaponBuilder;
+
             GameObject newBase = weapon.weaponBase.model;
 
             if (newBase == null)
-                newBase = _weaponBuilder.defaultMeleeBase;
+                newBase = ServiceLocator.Resolve<ItemIndex>().Get<WeaponBase>("Default Melee").model;
 
             GameObject newWeaponBase = Object.Instantiate(newBase, Vector3.zero, Quaternion.identity);
 
@@ -30,7 +32,7 @@ namespace Scrapyard.services.modelbuilders
             GameObject end = melee.end.model;
 
             if (end == null)
-                end = _weaponBuilder.defaultBlade;
+                end = ServiceLocator.Resolve<ItemIndex>().Get<WeaponPart>("Default Blade").model;
 
             end = Object.Instantiate(end, Vector3.zero, Quaternion.identity);
 

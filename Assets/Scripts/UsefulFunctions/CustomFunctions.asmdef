@@ -1,14 +1,9 @@
 {
-    "name": "Services",
+    "name": "CustomFunctions",
     "rootNamespace": "",
-    "references": [
-        "GUID:856893385f2be424dbe3450153703b45",
-        "GUID:388b39699a28a7d49ab2142a93d2254b"
-    ],
+    "references": [],
     "includePlatforms": [],
-    "excludePlatforms": [
-        "WebGL"
-    ],
+    "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],

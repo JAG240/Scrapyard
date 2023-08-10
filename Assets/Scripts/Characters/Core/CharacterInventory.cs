@@ -25,20 +25,6 @@ namespace Scrapyard.core.character
             equippedWeapons = new Weapon[2];
         }
 
-        public void GiveWeapon()
-        {
-            ItemIndex index = ServiceLocator.Resolve<ItemIndex>();
-            //Weapon weapon = ServiceLocator.Resolve<WeaponBuilder>().BuildWeapon(index.Get<WeaponBase>("Water Pipe Pistol"), new WeaponPart[] { index.Get<WeaponPart>("Split Barrel"), index.Get<WeaponPart>("Sticky Grip") });
-            Weapon weapon = ServiceLocator.Resolve<WeaponBuilder>().BuildWeapon(index.Get<WeaponBase>("Bat Handle"), new WeaponPart[] { index.Get<WeaponPart>("Bat End")});
-
-            if (weapon == null)
-                ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, "Weapon not built, incorrect combination");
-            else
-                ServiceLocator.Resolve<services.Console>().Log(services.LogType.LOG, "Weapon added to primary slot");
-
-            equipWeapon(0, weapon);
-        }
-
         public bool equipWeapon(int slot, Weapon weapon)
         {
             if (slot > equippedWeapons.Length - 1)

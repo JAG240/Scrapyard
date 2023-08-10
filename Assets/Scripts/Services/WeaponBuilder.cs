@@ -6,34 +6,33 @@ using Scrapyard.items;
 using UnityEngine;
 using System.Reflection;
 using Scrapyard.services.modelbuilders;
+using System.Linq;
 
 namespace Scrapyard.services 
 {
     public class WeaponBuilder : Service
     {
         [field:SerializeField] public GameObject defaultGunBase {get; private set;}
-        [field:SerializeField] public GameObject defaultMeleeBase {get; private set;}
         [field:SerializeField] public GameObject defaultGrip {get; private set;}
         [field:SerializeField] public GameObject defaultBarrel {get; private set;}
-        [field: SerializeField] public GameObject defaultBlade { get; private set; }
 
-        private GunModelBuilder _gunModelBuilder;
-        private MeleeModelBuilder _meleeModelBuilder;
+        private List<ModelBuilder> modelBuilders = new List<ModelBuilder>();
 
         protected override void Register()
         {
-            _gunModelBuilder = new GunModelBuilder(this);
-            _meleeModelBuilder = new MeleeModelBuilder(this);
-
+            modelBuilders = CustomFunctions.CreateInstances<ModelBuilder>();
             ServiceLocator.Register<WeaponBuilder>(this);
         }
 
         public GameObject BuildWeaponModel(Weapon weapon)
         {
-            if (weapon.weaponBase.type == WeaponType.Gun)
-                return _gunModelBuilder.Build(weapon);
-            else if (weapon.weaponBase.type == WeaponType.Melee)
-                return _meleeModelBuilder.Build(weapon);
+            foreach(ModelBuilder builder in modelBuilders)
+            {
+                if(weapon.weaponBase.type == builder.type)
+                {
+                    return builder.Build(this, weapon);
+                }
+            }
 
             return null;
         }

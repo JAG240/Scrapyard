@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47ba275b1e1f09f438faef546c0bddd4, type: 3}
-  m_Name: Split Barrel
+  m_Name: Default Grip
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
   <bluntDamage>k__BackingField: 0
@@ -18,6 +18,6 @@ MonoBehaviour:
   <accuracy>k__BackingField: 0
   <reloadSpeed>k__BackingField: 0
   <modSlots>k__BackingField: 0
-  <type>k__BackingField: 1
-  <model>k__BackingField: {fileID: 8275991850860724156, guid: 41c14f8847f96a142bd58fd01ed6c5ee, type: 3}
+  <type>k__BackingField: 0
+  <model>k__BackingField: {fileID: 115770862574415538, guid: 12a005200f3e1f946855159dbc5d2e48, type: 3}
   <baseTypes>k__BackingField: 02000000030000000400000005000000
