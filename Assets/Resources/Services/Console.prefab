@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f78bdca5a64b92479d5e4e69fe941c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _logPanel: {fileID: 3667758017810451053}
+  _content: {fileID: 3667758017810451053}
   _commandConsole: {fileID: 8651920895059016631}
   _scroll: {fileID: 5181369908023269947}
 --- !u!114 &876331507674344323

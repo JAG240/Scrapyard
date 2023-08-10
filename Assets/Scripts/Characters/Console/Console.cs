@@ -8,7 +8,7 @@ namespace Scrapyard.services
 {
     public class Console : Service
     {
-        [SerializeField] private RectTransform _logPanel;
+        [SerializeField] private RectTransform _content;
         [SerializeField] private TMP_InputField _commandConsole;
         [SerializeField] private RectTransform _scroll;
 
@@ -31,7 +31,7 @@ namespace Scrapyard.services
         public void Log(LogType type, string message)
         {
             GameObject textLog = new GameObject();
-            textLog.transform.parent = _logPanel.transform;
+            textLog.transform.parent = _content.transform;
             textLog.transform.localScale = Vector3.one;
 
             TextMeshProUGUI text = textLog.AddComponent<TextMeshProUGUI>();
@@ -62,7 +62,7 @@ namespace Scrapyard.services
             Log(LogType.LOG, command);
             _commandConsole.text = string.Empty;
             _commandConsole.ActivateInputField();
-            _logPanel.localPosition = new Vector3(_logPanel.localPosition.x, _logPanel.sizeDelta.y - 100f, _logPanel.localPosition.z);
+            _content.localPosition = new Vector3(_content.localPosition.x, _content.sizeDelta.y - 100f, _content.localPosition.z);
 
             //TODO: Write command handler
             if (command == "GiveWeapon")
