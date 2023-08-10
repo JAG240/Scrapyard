@@ -17,6 +17,7 @@ namespace Scrapyard.services
 
             Instantiate(Resources.Load("Services/WeaponBuilder"));
             Instantiate(Resources.Load("Services/ItemIndex"));
+            Instantiate(Resources.Load("Services/BulletInfo"));
 
             Destroy(gameObject);
         }

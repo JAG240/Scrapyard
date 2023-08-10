@@ -10,5 +10,6 @@ namespace Scrapyard.items.weapons
         [field: SerializeField] public WeaponType type { get; private set; }
         [field: SerializeField] public WeaponBaseType baseType { get; private set; }
         [field: SerializeField] public AmmoType ammoType { get; private set; }
+        [field: SerializeField] public GameObject model { get; private set; }
     }
 }

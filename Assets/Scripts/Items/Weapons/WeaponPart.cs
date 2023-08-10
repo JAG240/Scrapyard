@@ -7,6 +7,7 @@ namespace Scrapyard.items.weapons
     public class WeaponPart : WeaponStats
     {
         [field:SerializeField] public WeaponPartType type { get; private set; }
+        [field: SerializeField] public GameObject model { get; private set; }
         [field: SerializeField] public List<WeaponBaseType> baseTypes { get; private set; }
     }
 }

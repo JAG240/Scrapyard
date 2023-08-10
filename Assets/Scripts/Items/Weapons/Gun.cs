@@ -2,8 +2,8 @@ namespace Scrapyard.items.weapons
 {
     public class Gun : Weapon
     {
-        protected WeaponPart grip { get; private set; }
-        protected WeaponPart barrel { get; private set; }
+        public WeaponPart grip { get; private set; }
+        public WeaponPart barrel { get; private set; }
 
         public Gun(WeaponBase weaponBase, WeaponPart[] weaponParts) : base(weaponBase, weaponParts)
         {

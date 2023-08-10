@@ -18,5 +18,5 @@ MonoBehaviour:
   <accuracy>k__BackingField: 0
   <reloadSpeed>k__BackingField: 0
   <modSlots>k__BackingField: 0
-  <type>k__BackingField: 0
-  <baseTypes>k__BackingField: 
+  <type>k__BackingField: 1
+  <baseTypes>k__BackingField: 02000000030000000400000005000000

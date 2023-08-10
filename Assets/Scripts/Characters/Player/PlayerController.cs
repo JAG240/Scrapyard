@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +8,7 @@ namespace Scrapyard.core.character
 {
     public class PlayerController : Player
     {
-        [SerializeField] private bool allowMovement = true;
+        [SerializeField] private bool _allowMovement = true;
 
         private CharacterController _characterController;
 
@@ -16,6 +17,8 @@ namespace Scrapyard.core.character
 
         private Vector3 _mousePos;
         private float _timeCount = 0.0f;
+
+        private bool _inConsole = false;
 
         public Transform overrideLookTo;
 
@@ -32,7 +35,7 @@ namespace Scrapyard.core.character
 
         private void Rotate()
         {
-            if (Input.mousePosition == _mousePos && overrideLookTo == null)
+            if (Input.mousePosition == _mousePos && overrideLookTo == null || !_allowMovement)
                 return;
 
             _mousePos = Input.mousePosition;
@@ -73,20 +76,36 @@ namespace Scrapyard.core.character
             Vector2 input = value.Get<Vector2>();
             _rawMove = input;
 
-            if (allowMovement)
+            if (_allowMovement)
                 _controllerMove = input;
+        }
+
+        public void OnConsole()
+        {
+            _inConsole = !_inConsole;
+
+            if (_inConsole)
+                DisableMovement();
+            else
+                EnableMovement();
+        }
+
+        public void OnFire(InputValue value)
+        {
+            //1f for pressed and 0f for released
+            //Debug.Log(value.Get<float>());
         }
 
         public void DisableMovement()
         {
             _controllerMove = Vector2.zero;
-            allowMovement = false;
+            _allowMovement = false;
         }
 
         public void EnableMovement()
         {
             _controllerMove = _rawMove;
-            allowMovement = true;
+            _allowMovement = true;
         }
     }
 }

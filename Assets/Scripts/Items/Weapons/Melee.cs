@@ -2,7 +2,7 @@ namespace Scrapyard.items.weapons
 {
     public class Melee : Weapon
     {
-        protected WeaponPart end { get; private set; }
+        public WeaponPart end { get; private set; }
 
         public Melee(WeaponBase weaponBase, WeaponPart[] weaponParts) : base(weaponBase, weaponParts)
         {

@@ -545,7 +545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <team>k__BackingField: 0
   characterAttributes: {fileID: 11400000, guid: 85c1f785b05579a44b11b36d9fe94d7f, type: 2}
-  allowMovement: 1
+  _allowMovement: 1
   overrideLookTo: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
@@ -789,7 +789,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1264899900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.245484, y: -0.05422131, z: 6.2021613}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

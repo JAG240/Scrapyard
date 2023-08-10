@@ -8,18 +8,19 @@ namespace Scrapyard.services
 {
     public class Console : Service
     {
-        [SerializeField] private RectTransform logPanel;
-        [SerializeField] private TMP_InputField commandConsole;
-        [SerializeField] private RectTransform scroll;
+        [SerializeField] private RectTransform _logPanel;
+        [SerializeField] private TMP_InputField _commandConsole;
+        [SerializeField] private RectTransform _scroll;
 
         protected override void Awake()
         {
             base.Awake();
         }
 
-        private void Start()
+        public void OnConsole()
         {
-
+            GameObject root = transform.GetChild(0).gameObject;
+            root.SetActive(!root.activeInHierarchy);
         }
 
         protected override void Register()
@@ -30,7 +31,7 @@ namespace Scrapyard.services
         public void Log(LogType type, string message)
         {
             GameObject textLog = new GameObject();
-            textLog.transform.parent = logPanel.transform;
+            textLog.transform.parent = _logPanel.transform;
             textLog.transform.localScale = Vector3.one;
 
             TextMeshProUGUI text = textLog.AddComponent<TextMeshProUGUI>();
@@ -57,19 +58,17 @@ namespace Scrapyard.services
 
         public void EnterCommand()
         {
-            string command = commandConsole.text;
+            string command = _commandConsole.text;
             Log(LogType.LOG, command);
-            commandConsole.text = string.Empty;
-            commandConsole.ActivateInputField();
-            logPanel.localPosition = new Vector3(logPanel.localPosition.x, logPanel.sizeDelta.y - 100f, logPanel.localPosition.z);
+            _commandConsole.text = string.Empty;
+            _commandConsole.ActivateInputField();
+            _logPanel.localPosition = new Vector3(_logPanel.localPosition.x, _logPanel.sizeDelta.y - 100f, _logPanel.localPosition.z);
 
             //TODO: Write command handler
             if (command == "GiveWeapon")
             {
                 GameObject.Find("Player").GetComponent<Character>().inventory.GiveWeapon();
             }
-            else if (command == "ShowWeapon")
-                Log(LogType.LOG, GameObject.Find("Player").GetComponent<Character>().inventory.primaryWeapon.bluntDamage.ToString());
         }
     }
 }

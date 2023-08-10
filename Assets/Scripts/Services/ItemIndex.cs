@@ -14,7 +14,7 @@ namespace Scrapyard.services
         private Dictionary<string, WeaponPart> WeaponParts = new Dictionary<string, WeaponPart>();
 
 
-        public void Index()
+        private void Index()
         {
             object[] items = Resources.LoadAll("Items");
             LoadItemDictionary<Item>(items, Items);

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Scrapyard.items.weapons
 {
     public abstract class Weapon
@@ -8,7 +10,8 @@ namespace Scrapyard.items.weapons
         public float reloadSpeed { get; protected set; }
         public bool isComplete { get; protected set; } = false;
 
-        protected WeaponBase weaponBase;
+        public WeaponBase weaponBase { get; protected set; }
+        public GameObject model;
 
         public Weapon(WeaponBase weaponBase, WeaponPart[] weaponParts)
         {
