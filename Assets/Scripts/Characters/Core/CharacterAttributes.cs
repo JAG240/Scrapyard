@@ -10,5 +10,6 @@ namespace Scrapyard.core.character
         [field: SerializeField] public float bluntDefense { get; private set; }
         [field: SerializeField] public float sharpDefense { get; private set; }
         [field: SerializeField] public float speed { get; private set; }
+        [field: SerializeField] public float dodgeTime { get; private set; } = 0.07f;
     }
 }

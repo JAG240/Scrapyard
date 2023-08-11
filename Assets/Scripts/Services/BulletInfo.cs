@@ -5,23 +5,23 @@ namespace Scrapyard.services
 {
     public class BulletInfo : Service
     {
-        [SerializeField] private Mesh Nut;
-        [SerializeField] private Mesh Screw;
+        [SerializeField] private GameObject Nut;
+        [SerializeField] private GameObject Screw;
 
         protected override void Register()
         {
             ServiceLocator.Register<BulletInfo>(this);
         }
 
-        public Mesh GetBulletMesh(AmmoType ammoType)
+        public GameObject GetBulletMesh(AmmoType ammoType)
         {
             switch (ammoType)
             {
-                case AmmoType.NUT:
+                case AmmoType.Nut:
                     return Nut;
-                case AmmoType.SCREW:
+                case AmmoType.Screw:
                     return Screw;
-                case AmmoType.NONE:
+                case AmmoType.None:
                     return null;
                 default:
                     return Nut;

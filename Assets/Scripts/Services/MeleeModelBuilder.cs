@@ -29,7 +29,7 @@ namespace Scrapyard.services.modelbuilders
 
             Melee melee = weapon as Melee;
 
-            GameObject end = melee.end.model;
+            GameObject end = melee.meleeEnd.model;
 
             if (end == null)
                 end = ServiceLocator.Resolve<ItemIndex>().Get<WeaponPart>("Default Blade").model;

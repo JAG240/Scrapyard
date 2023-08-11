@@ -45,6 +45,8 @@ namespace Scrapyard.services.modelbuilders
             baseModel.EquipPart(grip, WeaponPartType.GRIP);
             baseModel.EquipPart(barrel, WeaponPartType.BARREL);
 
+            weapon.end = barrel.transform.Find("end");
+
             return newWeaponBase;
         }
 

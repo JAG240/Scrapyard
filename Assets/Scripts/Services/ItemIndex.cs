@@ -12,6 +12,7 @@ namespace Scrapyard.services
         private Dictionary<string, Item> Items = new Dictionary<string, Item>();
         private Dictionary<string, WeaponBase> WeaponBases = new Dictionary<string, WeaponBase>();
         private Dictionary<string, WeaponPart> WeaponParts = new Dictionary<string, WeaponPart>();
+        private Dictionary<string, BulletBase> Bullets = new Dictionary<string, BulletBase>();
 
 
         private void Index()
@@ -24,6 +25,9 @@ namespace Scrapyard.services
 
             object[] parts = Resources.LoadAll("WeaponParts");
             LoadItemDictionary<WeaponPart>(parts, WeaponParts);
+
+            object[] bullets = Resources.LoadAll("Bullets");
+            LoadItemDictionary<BulletBase>(bullets, Bullets);
         }
 
         private void LoadItemDictionary<T>(object[] objs, Dictionary<string, T> list)
@@ -54,6 +58,12 @@ namespace Scrapyard.services
             {
                 WeaponPart obj;
                 WeaponParts.TryGetValue(name, out obj);
+                return (T)Convert.ChangeType(obj, typeof(T));
+            }
+            else if(typeof(T) == typeof(BulletBase))
+            {
+                BulletBase obj;
+                Bullets.TryGetValue(name, out obj);
                 return (T)Convert.ChangeType(obj, typeof(T));
             }
 

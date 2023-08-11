@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Scrapyard.core.character;
-using System.Text.RegularExpressions;
 using Scrapyard.services.commands;
 
 namespace Scrapyard.services
@@ -50,8 +49,10 @@ namespace Scrapyard.services
             text.color = GetTextColor(type);
             text.rectTransform.sizeDelta = new Vector2(1600f, 50f);
 
-            if (_content.rect.height + 100 > _scroll.rect.height)
-                _content.localPosition = new Vector3(_content.localPosition.x, _content.localPosition.y + 50, _content.localPosition.z);
+            int childHeight = _content.childCount * 50;
+
+            if (childHeight > _scroll.rect.height)
+                _content.anchoredPosition = new Vector2(_content.anchoredPosition.x, childHeight - 500);
 
         }
 
@@ -74,6 +75,11 @@ namespace Scrapyard.services
         {
             string command = _commandConsole.text;
 
+            if (command.EndsWith("\n"))
+                command.Remove(command.Length - 1);
+            else
+                return;
+
             if (command == string.Empty)
                 return;
 
@@ -93,8 +99,11 @@ namespace Scrapyard.services
                 if(string.Equals(com.keyWord, args[0], System.StringComparison.OrdinalIgnoreCase))
                 {
                     com.Execute(command);
+                    return;
                 }
             }
+
+            Log(LogType.ERROR, $"Command {args[0].Trim('\n')} not found");
         }
     }
 }

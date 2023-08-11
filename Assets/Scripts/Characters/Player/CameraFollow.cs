@@ -6,8 +6,10 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float _minSpeed = 2f;
     [SerializeField] private float _maxSpeed = 6f;
     [SerializeField] private float _maxDistance = 1.5f;
-    [SerializeField] private float _zoom = 8f;
-    [SerializeField] [Range(0, 1)] private float rotation;
+    [SerializeField] public float _zoom = 8f;
+    [SerializeField] [Range(0, 1)] public float rotation;
+    [field: SerializeField] public float cameraRotationSpeed { get; private set; } = 1f;
+    [field: SerializeField] public float cameraZoomSpeed { get; private set; } = 1f;
 
     private float _defaultDist;
     private Vector3 _dest;
@@ -47,18 +49,25 @@ public class CameraFollow : MonoBehaviour
         float degPos = rotation * CustomFunctions.Tau;
         _dest = new Vector3(Mathf.Cos(degPos) * _zoom + _player.position.x, transform.position.y, Mathf.Sin(degPos) * _zoom + _player.position.z);
 
-        if ((_previousRotation != rotation || targetRot != transform.rotation) || _zoom != _previousZoom)
+        if ((_previousRotation != rotation || targetRot != transform.rotation) || _zoom != _previousZoom || transform.rotation != targetRot)
         {
             SmoothLookAt();
             _previousRotation = rotation;
             _previousZoom = _zoom;
         }
-
     }
 
     private void SmoothLookAt()
     {
+        if (this == null)
+            return;
+
         targetRot = Quaternion.LookRotation(_player.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 5f * Time.deltaTime);
+    }
+
+    public void ReturnCameraToPlayer()
+    {
+        SmoothLookAt();
     }
 }

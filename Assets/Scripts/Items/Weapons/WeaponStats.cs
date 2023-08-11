@@ -11,5 +11,6 @@ namespace Scrapyard.items.weapons
         [field:SerializeField] public float accuracy { get; private set; }
         [field:SerializeField] public float reloadSpeed { get; private set; }
         [field:SerializeField] public int modSlots { get; private set; }
+        [field: SerializeField] public float range { get; private set; }
     }
 }

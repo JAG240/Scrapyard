@@ -26,8 +26,8 @@ namespace Scrapyard.items.weapons
 
     public enum AmmoType
     {
-        NONE,
-        SCREW,
-        NUT
+        None,
+        Screw,
+        Nut
     }
 }

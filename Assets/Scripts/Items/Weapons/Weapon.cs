@@ -8,9 +8,12 @@ namespace Scrapyard.items.weapons
         public float sharpDamage { get; protected set; }
         public float accuracy { get; protected set; }
         public float reloadSpeed { get; protected set; }
+        public float range { get; protected set; } 
         public bool isComplete { get; protected set; } = false;
 
         public WeaponBase weaponBase { get; protected set; }
+        public GameObject bullet { get; set; }
+        public Transform end { get; set; }
         public GameObject model;
 
         public Weapon(WeaponBase weaponBase, WeaponPart[] weaponParts)

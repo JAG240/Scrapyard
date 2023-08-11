@@ -12,21 +12,30 @@ namespace Scrapyard.core.character
     {
         public Weapon[] equippedWeapons { get; private set; }
         public object[] inventory { get; private set; }
+        private Transform _handPos;
+        private Transform _holsterPos;
 
-        public CharacterInventory(int maxInventorySize, int maxWeaponSlots)
+        public CharacterInventory(int maxInventorySize, int maxWeaponSlots, Transform hand, Transform holster) : this(maxInventorySize, hand, holster)
         {
-            inventory = new object[maxInventorySize];
-            equippedWeapons = new Weapon[maxWeaponSlots];
+            equippedWeapons = new Weapon[maxWeaponSlots];;
         }
 
-        public CharacterInventory(int maxInventorySize)
+        public CharacterInventory(int maxInventorySize, Transform hand, Transform holster)
         {
             inventory = new object[maxInventorySize];
             equippedWeapons = new Weapon[2];
+            _handPos = hand;
+            _holsterPos = holster;
         }
 
         public bool equipWeapon(int slot, Weapon weapon)
         {
+            if (!weapon.isComplete)
+            {
+                ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, $"Attempted to equip an incomplete weapon");
+                return false;
+            }
+
             if (slot > equippedWeapons.Length - 1)
             {
                 ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, $"Attempted to put weapon in slot {slot} when there are only {equippedWeapons.Length} slots");
@@ -36,17 +45,52 @@ namespace Scrapyard.core.character
             if(equippedWeapons[slot] != null)
             {
                 if (!AddToInventory(equippedWeapons[slot]))
+                {
                     ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, "Inventory Full, cannot unequip current weapon");
+                    return false;
+                }
                 else if(slot == 0)
                     ServiceLocator.Resolve<WeaponBuilder>().DestroyModel(equippedWeapons[slot]);
             }
 
             equippedWeapons[slot] = weapon;
 
-            if(slot == 0)
-                ServiceLocator.Resolve<WeaponBuilder>().BuildWeaponModel(weapon);
+            weapon.model = ServiceLocator.Resolve<WeaponBuilder>().BuildWeaponModel(weapon);
+
+            UpdateWeaponModels();
 
             return true;
+        }
+
+        public void Clear()
+        {
+            inventory = new object[inventory.Length];
+            
+            for(int i = 0; i < equippedWeapons.Length; i++)
+            {
+                ServiceLocator.Resolve<WeaponBuilder>().DestroyModel(equippedWeapons[i]);
+                equippedWeapons[i] = null;
+            }
+        }
+
+        public void UpdateWeaponModels()
+        {
+            for(int i = 0; i < equippedWeapons.Length; i++)
+            {
+                if(equippedWeapons[i] == null || equippedWeapons[i].model == null)
+                {
+                    ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, $"No weapon to update model for in slot {i}");
+                    continue;
+                }
+
+                if (i == 0)
+                    equippedWeapons[i].model.transform.parent = _handPos;
+                else
+                    equippedWeapons[i].model.transform.parent = _holsterPos;
+
+                equippedWeapons[i].model.transform.localPosition = Vector3.zero;
+                equippedWeapons[i].model.transform.rotation = equippedWeapons[i].model.transform.parent.rotation;
+            }
         }
 
         public bool AddToInventory(object o)

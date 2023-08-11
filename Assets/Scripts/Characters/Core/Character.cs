@@ -16,10 +16,15 @@ namespace Scrapyard.core.character
 
         public float health { get; private set; } = 1;
         public float stamina { get; private set; } = 1;
-        public CharacterInventory inventory { get; private set; } = new CharacterInventory(12);
+        public float dodgeTime { get; private set; }
+        public CharacterInventory inventory { get; private set; }
+        [SerializeField] protected float dodgeSpeed = 30f;
+        [SerializeField] private Transform handPos;
+        [SerializeField] private Transform holsterPos;
 
         protected virtual void Start()
         {
+            inventory = new CharacterInventory(12, handPos, holsterPos);
             UpdateStats();
             Restore();
         }
@@ -31,6 +36,7 @@ namespace Scrapyard.core.character
             bluntDefense = characterAttributes.bluntDefense;
             sharpDefense = characterAttributes.sharpDefense;
             speed = characterAttributes.speed;
+            dodgeTime = characterAttributes.dodgeTime;
         }
 
         private void Restore()

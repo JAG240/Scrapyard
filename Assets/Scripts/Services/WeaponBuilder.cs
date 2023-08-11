@@ -39,7 +39,8 @@ namespace Scrapyard.services
 
         public void DestroyModel(Weapon weapon)
         {
-            Destroy(weapon.model);
+            if(weapon != null && weapon.model != null)
+                Destroy(weapon.model);
         }
 
 
@@ -51,11 +52,15 @@ namespace Scrapyard.services
             Assembly asm = typeof(Weapon).Assembly;
             Type type = asm.GetType("Scrapyard.items.weapons." + weaponBase.type.ToString());
             Weapon weapon = (Weapon)Activator.CreateInstance(type, weaponBase, weaponParts);
+            weapon.bullet = ServiceLocator.Resolve<ItemIndex>().Get<BulletBase>(weaponBase.ammoType.ToString()).bullet;
             return weapon;
         }
 
         public bool Validate(WeaponBase weaponBase, WeaponPart[] weaponParts)
         {
+            if (weaponBase == null)
+                return false;
+
             List<WeaponPartType> partTypes = new List<WeaponPartType>();
 
             foreach(WeaponPart part in weaponParts)
