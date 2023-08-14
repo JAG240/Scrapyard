@@ -7,23 +7,40 @@ namespace Scrapyard.items.weapons
 {
     public class BulletBehavior : Teamable
     {
-        Rigidbody RB;
-        bool notGround = true;
+        private Rigidbody rigidBody;
+        private Vector3 startPos;
+        private float range;
+        private Vector3 dir;
+        private float speed;
+        private bool atRange = false;
 
-        private void Start()
+        public virtual void Init(float range, Vector3 dir, float speed)
         {
-            RB = GetComponent<Rigidbody>();
+            this.range = range;
+            this.dir = dir;
+            this.speed = speed;
         }
 
-        private void Update()
+        protected virtual void Start()
         {
-            if(notGround)
-                Debug.Log(RB.velocity.magnitude);
+            startPos = transform.position;
+            rigidBody = GetComponent<Rigidbody>();
         }
 
-        private void OnCollisionEnter(Collision collision)
+        protected virtual void Update()
         {
-            notGround = false;
+            if(!atRange)
+                rigidBody.velocity = dir * speed;
+
+            if(Vector3.Distance(transform.position, startPos) >= range)
+            {
+                atRange = true;
+            }
+        }
+
+        protected virtual void OnCollisionEnter(Collision collision)
+        {
+            
         }
     }
 

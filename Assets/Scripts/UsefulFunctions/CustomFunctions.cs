@@ -24,6 +24,11 @@ public static class CustomFunctions
         return Lerp(oMin, oMax, t);
     }
 
+    public static float AngleBetweenPoints(Vector3 a, Vector3 b)
+    {
+        return Mathf.Atan2(a.x - b.x, a.z - b.z) * Mathf.Rad2Deg;
+    }
+
     public static List<T> CreateInstances<T>()
     {
         List<T> objs = new List<T>();

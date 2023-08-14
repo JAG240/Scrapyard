@@ -18,6 +18,9 @@ MonoBehaviour:
   <accuracy>k__BackingField: 0
   <reloadSpeed>k__BackingField: 0
   <modSlots>k__BackingField: 0
+  <range>k__BackingField: 0
+  <bulletSpeed>k__BackingField: 0
+  <firerate>k__BackingField: 0
   <type>k__BackingField: 0
   <model>k__BackingField: {fileID: 0}
-  <baseTypes>k__BackingField: 02000000050000000300000004000000
+  <baseTypes>k__BackingField: 0500000004000000

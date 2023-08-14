@@ -9,26 +9,8 @@ namespace Scrapyard.items.weapons
 
         }
 
-        protected override void CalcuateStats()
+        protected override void SetComplete()
         {
-            if (weaponBase)
-            {
-                bluntDamage += weaponBase.bluntDamage;
-                sharpDamage += weaponBase.sharpDamage;
-                accuracy += weaponBase.accuracy;
-                reloadSpeed += weaponBase.reloadSpeed;
-                range += weaponBase.range;
-            }
-
-            if (meleeEnd)
-            {
-                bluntDamage += meleeEnd.bluntDamage;
-                sharpDamage += meleeEnd.sharpDamage;
-                accuracy += meleeEnd.accuracy;
-                reloadSpeed += meleeEnd.reloadSpeed;
-                range += meleeEnd.range;
-            }
-
             if (weaponBase && meleeEnd)
                 isComplete = true;
             else

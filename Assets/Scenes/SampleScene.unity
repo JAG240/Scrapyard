@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 281000309}
   - component: {fileID: 281000308}
   - component: {fileID: 281000307}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,6 +446,10 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 616772933}
+    - target: {fileID: 5074146188806648494, guid: 2ce4aa8192b0b1847bf06e4697247980, type: 3}
+      propertyPath: _minSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5934050568201256311, guid: 2ce4aa8192b0b1847bf06e4697247980, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -506,6 +510,10 @@ PrefabInstance:
     - target: {fileID: 2822656793627197900, guid: 0942904266aa9fb4a9a3bd0a23598e0d, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819536092151328101, guid: 0942904266aa9fb4a9a3bd0a23598e0d, type: 3}
+      propertyPath: dodgeSpeed
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6776028984633215998, guid: 0942904266aa9fb4a9a3bd0a23598e0d, type: 3}
       propertyPath: m_RootOrder

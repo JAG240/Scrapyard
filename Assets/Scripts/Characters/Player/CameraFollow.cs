@@ -51,6 +51,7 @@ public class CameraFollow : MonoBehaviour
 
         if ((_previousRotation != rotation || targetRot != transform.rotation) || _zoom != _previousZoom || transform.rotation != targetRot)
         {
+            transform.position = Vector3.MoveTowards(transform.position, _dest, 4f);
             SmoothLookAt();
             _previousRotation = rotation;
             _previousZoom = _zoom;
@@ -63,7 +64,7 @@ public class CameraFollow : MonoBehaviour
             return;
 
         targetRot = Quaternion.LookRotation(_player.position - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 5f * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 8f * Time.deltaTime);
     }
 
     public void ReturnCameraToPlayer()

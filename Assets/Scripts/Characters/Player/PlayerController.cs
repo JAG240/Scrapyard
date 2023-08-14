@@ -37,6 +37,7 @@ namespace Scrapyard.core.character
         private void Update()
         {
             Move();
+            ApplyGravity();
             Rotate();
         }
 
@@ -50,16 +51,11 @@ namespace Scrapyard.core.character
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out _mouseLastHit, 100))
             {
-                float angle = overrideLookTo == null ? AngleBetweenPoints(_mouseLastHit.point, transform.position) : AngleBetweenPoints(overrideLookTo.position, transform.position);
+                float angle = overrideLookTo == null ? CustomFunctions.AngleBetweenPoints(_mouseLastHit.point, transform.position) : CustomFunctions.AngleBetweenPoints(overrideLookTo.position, transform.position);
                 Quaternion dest = Quaternion.Euler(new Vector3(0f, angle, 0f));
                 transform.rotation = Quaternion.Slerp(transform.rotation, dest, _timeCount);
                 _timeCount = _timeCount + Time.deltaTime;
             }
-        }
-
-        private float AngleBetweenPoints(Vector3 a, Vector3 b) 
-        { 
-            return Mathf.Atan2(a.x - b.x, a.z - b.z) * Mathf.Rad2Deg; 
         }
 
         private void Move()
@@ -85,6 +81,18 @@ namespace Scrapyard.core.character
                 _controllerMove = input;
         }
 
+        private void ApplyGravity()
+        {
+            float r = _characterController.radius * 0.9f;
+            Vector3 pos = transform.position + Vector3.down * (r * 0.2f);
+            pos.y -= transform.localScale.y / 2;
+
+            if (Physics.CheckSphere(pos, r, LayerMask.GetMask("Ground")))
+                return;
+
+            _characterController.Move(Vector3.up * Physics.gravity.y * Time.deltaTime);
+        }
+
         public void OnDodge()
         {
             if (_doding || _currentDir == Vector3.zero)
@@ -101,8 +109,10 @@ namespace Scrapyard.core.character
 
             while(dodgeTimer < dodgeTime)
             {
+                float smoothSpeed = dodgeSpeed - dodgeSpeed * (Mathf.Abs(dodgeTimer - (dodgeTime / 2)) * (2 / dodgeTime));
+
                 dodgeTimer += Time.deltaTime;
-                _characterController.Move(dir * dodgeSpeed * Time.deltaTime);
+                _characterController.Move(dir * smoothSpeed * Time.deltaTime);
                 yield return null;
             }
 
@@ -137,7 +147,7 @@ namespace Scrapyard.core.character
             dir.Normalize();
 
             if (state == 1)
-                Shoot(weapon.bullet, weapon.end.position, dir * weapon.range);
+                Shoot(weapon, weapon.end.position, dir);
         }
 
         public void OnEnableLook(InputValue value)

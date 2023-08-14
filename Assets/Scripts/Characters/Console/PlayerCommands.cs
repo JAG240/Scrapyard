@@ -78,6 +78,32 @@ namespace Scrapyard.services.commands
 
         }
 
+        private void GiveDefault(string[] args)
+        {
+            string type = args[1];
+            type = type.ToLower();
+
+            if(type.Contains("gun"))
+            {
+                ItemIndex index = ServiceLocator.Resolve<ItemIndex>();
+                Weapon weapon = ServiceLocator.Resolve<WeaponBuilder>().BuildWeapon(index.Get<WeaponBase>("Default Gun") , new WeaponPart[] { index.Get<WeaponPart>("Default Grip"), index.Get<WeaponPart>("Default Barrel") });
+                _player.inventory.equipWeapon(0, weapon);
+                ServiceLocator.Resolve<services.Console>().Log(services.LogType.LOG, "Weapon added to primary slot");
+            }
+            else if (type.Contains("melee"))
+            {
+                ItemIndex index = ServiceLocator.Resolve<ItemIndex>();
+                Weapon weapon = ServiceLocator.Resolve<WeaponBuilder>().BuildWeapon(index.Get<WeaponBase>("Default Melee"), new WeaponPart[] { index.Get<WeaponPart>("Default Blade") });
+                _player.inventory.equipWeapon(0, weapon);
+                ServiceLocator.Resolve<services.Console>().Log(services.LogType.LOG, "Weapon added to primary slot");
+            }
+            else
+            {
+                ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, "Default weapon type not found");
+            }
+
+        }
+
         private void ClearInv(string[] args)
         {
             _player.inventory.Clear();

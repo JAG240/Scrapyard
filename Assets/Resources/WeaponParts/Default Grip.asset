@@ -18,6 +18,7 @@ MonoBehaviour:
   <accuracy>k__BackingField: 0
   <reloadSpeed>k__BackingField: 0
   <modSlots>k__BackingField: 0
+  <range>k__BackingField: 1
   <type>k__BackingField: 0
   <model>k__BackingField: {fileID: 115770862574415538, guid: 12a005200f3e1f946855159dbc5d2e48, type: 3}
   <baseTypes>k__BackingField: 02000000030000000400000005000000

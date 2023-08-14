@@ -1,3 +1,6 @@
+using System.Reflection;
+using UnityEngine;
+
 namespace Scrapyard.items.weapons
 {
     public class Gun : Weapon
@@ -26,35 +29,8 @@ namespace Scrapyard.items.weapons
             }
         }
 
-        protected override void CalcuateStats()
+        protected override void SetComplete()
         {
-            if (weaponBase)
-            {
-                bluntDamage += weaponBase.bluntDamage;
-                sharpDamage += weaponBase.sharpDamage;
-                accuracy += weaponBase.accuracy;
-                reloadSpeed += weaponBase.reloadSpeed;
-                range += weaponBase.range;
-            }
-
-            if (grip)
-            {
-                bluntDamage += grip.bluntDamage;
-                sharpDamage += grip.sharpDamage;
-                accuracy += grip.accuracy;
-                reloadSpeed += grip.reloadSpeed;
-                range += grip.range;
-            }
-
-            if (barrel)
-            {
-                bluntDamage += barrel.bluntDamage;
-                sharpDamage += barrel.sharpDamage;
-                accuracy += barrel.accuracy;
-                reloadSpeed += barrel.reloadSpeed;
-                range += barrel.range;
-            }
-
             if (weaponBase && grip && barrel)
                 isComplete = true;
             else

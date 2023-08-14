@@ -38,6 +38,8 @@ namespace Scrapyard.services.modelbuilders
 
             baseModel.EquipPart(end, WeaponPartType.BLADE);
 
+            weapon.end = end.transform;
+
             return newWeaponBase;
         }
     }
