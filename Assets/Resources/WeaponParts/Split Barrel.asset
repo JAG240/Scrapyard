@@ -15,10 +15,12 @@ MonoBehaviour:
   sprite: {fileID: 0}
   <bluntDamage>k__BackingField: 0
   <sharpDamage>k__BackingField: 0
-  <accuracy>k__BackingField: 0
+  <accuracy>k__BackingField: -2
   <reloadSpeed>k__BackingField: 0
   <modSlots>k__BackingField: 0
-  <range>k__BackingField: 0
+  <range>k__BackingField: -0.2
+  <bulletSpeed>k__BackingField: 1
+  <firerate>k__BackingField: 0
   <type>k__BackingField: 1
   <model>k__BackingField: {fileID: 8275991850860724156, guid: 41c14f8847f96a142bd58fd01ed6c5ee, type: 3}
   <baseTypes>k__BackingField: 02000000030000000400000005000000

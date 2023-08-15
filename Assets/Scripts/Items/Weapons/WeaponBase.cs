@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scrapyard.items.weapons
@@ -11,5 +9,6 @@ namespace Scrapyard.items.weapons
         [field: SerializeField] public WeaponBaseType baseType { get; private set; }
         [field: SerializeField] public AmmoType ammoType { get; private set; }
         [field: SerializeField] public GameObject model { get; private set; }
+        [field: SerializeField] public FireMode fireMode { get; private set; }
     }
 }

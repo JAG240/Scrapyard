@@ -9,7 +9,7 @@ namespace Scrapyard.core
         protected void Shoot(Weapon weapon, Vector3 origin, Vector3 direction)
         {
             GameObject newBullet = Instantiate(weapon.bullet, origin, Quaternion.identity);
-            newBullet.GetComponent<BulletBehavior>().Init(weapon.range, direction, weapon.bulletSpeed);
+            newBullet.GetComponent<BulletBehavior>().Init(weapon, direction);
         }
     }
 }

@@ -15,9 +15,14 @@ MonoBehaviour:
   sprite: {fileID: 0}
   <bluntDamage>k__BackingField: 0
   <sharpDamage>k__BackingField: 0
-  <accuracy>k__BackingField: 0
+  <accuracy>k__BackingField: 2
   <reloadSpeed>k__BackingField: 0
   <modSlots>k__BackingField: 0
+  <range>k__BackingField: 2.5
+  <bulletSpeed>k__BackingField: 15
+  <firerate>k__BackingField: 0
   <type>k__BackingField: 0
   <baseType>k__BackingField: 2
   <ammoType>k__BackingField: 2
+  <model>k__BackingField: {fileID: 0}
+  <fireMode>k__BackingField: 0

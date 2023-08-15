@@ -20,8 +20,7 @@ namespace Scrapyard.items.weapons
         BAT,
         PISTOL,
         SHOTGUN,
-        RIFLE,
-        AUTORIFLE
+        RIFLE
     }
 
     public enum AmmoType
@@ -29,5 +28,12 @@ namespace Scrapyard.items.weapons
         None,
         Screw,
         Nut
+    }
+
+    public enum FireMode
+    {
+        SemiAuto,
+        FullAuto,
+        Burst
     }
 }

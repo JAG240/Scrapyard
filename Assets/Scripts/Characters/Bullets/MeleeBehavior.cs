@@ -6,7 +6,7 @@ namespace Scrapyard.items.weapons
 {
     public class MeleeBehavior : BulletBehavior
     {
-        public override void Init(float range, Vector3 dir, float speed)
+        public override void Init(Weapon weapon, Vector3 dir)
         {
 
         }
