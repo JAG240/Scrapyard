@@ -16,6 +16,7 @@ namespace Scrapyard.items.weapons
         [field: SerializeField] public float range { get; private set; }
         [field: SerializeField] public float bulletSpeed { get; private set; }
         [field: SerializeField] public float firerate { get; private set; }
+        [field: SerializeField] public int magSize { get; private set; }
 
         public Dictionary<string, float> GetStats()
         {

@@ -34,8 +34,10 @@ namespace Scrapyard.core.character
             _characterController = GetComponent<CharacterController>();
         }
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
+
             Move();
             ApplyGravity();
             Rotate();

@@ -14,12 +14,22 @@ namespace Scrapyard.items.weapons
         public float bulletSpeed { get; protected set; } 
         public float firerate { get; protected set; }
         public float modSlots { get; protected set; }
+        public float magSize { get; protected set; }
+        public float curMag { get; protected set; }
         public bool isComplete { get; protected set; } = false;
+        public bool onCooldown { get; protected set; } = false;
+        public bool isReloading { get; protected set; } = false;
 
         public WeaponBase weaponBase { get; protected set; }
         public GameObject bullet { get; set; }
         public Transform end { get; set; }
         public GameObject model;
+
+        private float maxFirerate = 10f;
+        private float maxFireTime = 2f;
+
+        private float cooldownTimer = 0f;
+        private float reloadTimer = 0f;
 
         public Weapon(WeaponBase weaponBase, WeaponPart[] weaponParts)
         {
@@ -27,6 +37,62 @@ namespace Scrapyard.items.weapons
             SetWeaponParts(weaponParts);
             CalcuateStats(weaponParts);
             SetComplete();
+
+            curMag = magSize;
+        }
+
+        public void Update()
+        {
+            UpdateFirerate();
+            UpdateReload();
+        }
+
+        public void Fire()
+        {
+            cooldownTimer = 0f;
+            onCooldown = true;
+
+            curMag -= 1;
+
+            if(magSize > 0 && curMag <= 0)
+                Reload();
+        }
+
+        public void Reload()
+        {
+            if(magSize > 0 && curMag < magSize)
+            {
+                reloadTimer = 0f;
+                isReloading = true;
+            }
+        }
+
+        private void UpdateReload()
+        {
+            if (isReloading)
+            {
+                reloadTimer += Time.deltaTime;
+                
+                if(reloadTimer >= reloadSpeed)
+                {
+                    curMag = magSize;
+                    isReloading = false;
+                }
+            }
+        }
+
+        private void UpdateFirerate()
+        {
+            if (onCooldown)
+            {
+                cooldownTimer += Time.deltaTime;
+                float firerateTime = CustomFunctions.remap(0f, maxFirerate, maxFireTime, 0f, firerate);
+
+                if (cooldownTimer >= firerateTime)
+                {
+                    onCooldown = false;
+                }
+            }
         }
 
         protected void SetWeaponBase(WeaponBase weaponBase)

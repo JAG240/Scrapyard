@@ -16,13 +16,14 @@ MonoBehaviour:
   <bluntDamage>k__BackingField: 0
   <sharpDamage>k__BackingField: 0
   <accuracy>k__BackingField: 0
-  <reloadSpeed>k__BackingField: 0
+  <reloadSpeed>k__BackingField: 2
   <modSlots>k__BackingField: 0
   <range>k__BackingField: 1
   <bulletSpeed>k__BackingField: 50
-  <firerate>k__BackingField: 0
+  <firerate>k__BackingField: 8
+  <magSize>k__BackingField: 8
   <type>k__BackingField: 0
   <baseType>k__BackingField: 2
-  <ammoType>k__BackingField: 2
+  <ammoType>k__BackingField: 1
   <model>k__BackingField: {fileID: 2425394993113323566, guid: ff1bd952f5fd3484a9b583c61350d728, type: 3}
   <fireMode>k__BackingField: 0

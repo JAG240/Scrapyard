@@ -16,11 +16,12 @@ MonoBehaviour:
   <bluntDamage>k__BackingField: 0
   <sharpDamage>k__BackingField: 0
   <accuracy>k__BackingField: 2
-  <reloadSpeed>k__BackingField: 0
+  <reloadSpeed>k__BackingField: 2
   <modSlots>k__BackingField: 0
   <range>k__BackingField: 2.5
   <bulletSpeed>k__BackingField: 15
-  <firerate>k__BackingField: 0
+  <firerate>k__BackingField: 7
+  <magSize>k__BackingField: 6
   <type>k__BackingField: 0
   <baseType>k__BackingField: 2
   <ammoType>k__BackingField: 2

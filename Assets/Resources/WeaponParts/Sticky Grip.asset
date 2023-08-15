@@ -21,6 +21,7 @@ MonoBehaviour:
   <range>k__BackingField: 0.7
   <bulletSpeed>k__BackingField: 2
   <firerate>k__BackingField: 0
+  <magSize>k__BackingField: 0
   <type>k__BackingField: 0
   <model>k__BackingField: {fileID: 0}
-  <baseTypes>k__BackingField: 05000000040000000200000003000000
+  <baseTypes>k__BackingField: 040000000200000003000000

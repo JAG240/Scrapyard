@@ -1,3 +1,4 @@
+using Scrapyard.core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ namespace Scrapyard.items.weapons
 {
     public class MeleeBehavior : BulletBehavior
     {
-        public override void Init(Weapon weapon, Vector3 dir)
+        public override void Init(Weapon weapon, Vector3 dir, Team team)
         {
 
         }

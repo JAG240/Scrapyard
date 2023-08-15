@@ -1,3 +1,4 @@
+using Scrapyard.items.weapons;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,15 @@ namespace Scrapyard.core.character
             inventory = new CharacterInventory(12, handPos, holsterPos);
             UpdateStats();
             Restore();
+        }
+
+        protected virtual void Update()
+        {
+            foreach(Weapon weapon in inventory.equippedWeapons)
+            {
+                if (weapon != null)
+                    weapon.Update();
+            }
         }
 
         private void UpdateStats()

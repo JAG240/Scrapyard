@@ -14,16 +14,27 @@ namespace Scrapyard.items.weapons
         private float speed;
         private bool atRange = false;
 
-        public virtual void Init(Weapon weapon, Vector3 dir)
+        private float maxAccuracy = 10f;
+        private float maxSpread = 0.5f;
+
+        public virtual void Init(Weapon weapon, Vector3 dir, Team team)
         {
             range = weapon.range;
             speed = weapon.bulletSpeed;
+            this.team = team;
             this.dir = ApplyBulletSpread(dir, weapon.accuracy);
+            LookAtDir();
+        }
+
+        private void LookAtDir()
+        {
+            float angle = CustomFunctions.AngleBetweenPoints(transform.position, dir + transform.position);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
 
         private Vector3 ApplyBulletSpread(Vector3 dir, float accuracy)
         {
-            float spread = CustomFunctions.remap(0, 10f, 0.5f, 0f, accuracy);
+            float spread = CustomFunctions.remap(0, maxAccuracy, maxSpread, 0f, accuracy);
             float offsetz = dir.z + Random.Range(-spread, spread);
             float offsetx = dir.x + Random.Range(-spread, spread);
 
