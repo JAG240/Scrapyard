@@ -1,4 +1,5 @@
 using Scrapyard.core;
+using Scrapyard.core.character;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,14 +14,24 @@ namespace Scrapyard.items.weapons
         private Vector3 dir;
         private float speed;
         private bool atRange = false;
+        private float sharpDamage;
+        private float bluntDamage;
 
         private float maxAccuracy = 10f;
         private float maxSpread = 0.5f;
 
+        private TrailRenderer trail;
+
         public virtual void Init(Weapon weapon, Vector3 dir, Team team)
         {
+            gameObject.layer = team == Team.player ? LayerMask.NameToLayer("Player Bullet") : LayerMask.NameToLayer("Enemy Bullet");
+
             range = weapon.range;
             speed = weapon.bulletSpeed;
+
+            sharpDamage = weapon.sharpDamage;
+            bluntDamage = weapon.bluntDamage;
+
             this.team = team;
             this.dir = ApplyBulletSpread(dir, weapon.accuracy);
             LookAtDir();
@@ -43,6 +54,7 @@ namespace Scrapyard.items.weapons
 
         protected virtual void Start()
         {
+            trail = GetComponent<TrailRenderer>();
             startPos = transform.position;
             rigidBody = GetComponent<Rigidbody>();
         }
@@ -55,9 +67,8 @@ namespace Scrapyard.items.weapons
             if(Vector3.Distance(transform.position, startPos) >= range && !atRange)
             {
                 float randDropoff = Random.Range(4f, 6f);
-                rigidBody.velocity = dir * (speed / randDropoff);
-                atRange = true;
-                StartCoroutine(StartDespawn());
+                //rigidBody.velocity = dir * (speed / randDropoff);
+                StopBullet();
             }
         }
 
@@ -85,9 +96,28 @@ namespace Scrapyard.items.weapons
             Destroy(gameObject);
         }
 
+        private void StopBullet()
+        {
+            trail.emitting = false;
+            atRange = true;
+            StartCoroutine(StartDespawn());
+        }
+
         protected virtual void OnCollisionEnter(Collision collision)
         {
-            
+            if (atRange)
+                return;
+
+            Debug.Log(collision.impulse.magnitude);
+
+            StopBullet();
+
+            Character character = collision.gameObject.GetComponent<Character>();
+
+            if (character == null)
+                return;
+
+            character.TakeDamage(sharpDamage, bluntDamage);
         }
     }
 

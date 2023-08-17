@@ -25,6 +25,8 @@ namespace Scrapyard.core.character
 
         protected virtual void Start()
         {
+            gameObject.layer = team == Team.player ? LayerMask.NameToLayer("Player") : LayerMask.NameToLayer("Enemy"); 
+
             inventory = new CharacterInventory(12, handPos, holsterPos);
             UpdateStats();
             Restore();
@@ -53,6 +55,20 @@ namespace Scrapyard.core.character
         {
             health = maxHealth;
             stamina = maxStamina;
+        }
+
+        public void TakeDamage(float sharpDamage, float bluntDamage)
+        {
+            health -= sharpDamage + bluntDamage;
+
+            if (health <= 0f)
+                Die();
+
+        }
+
+        private void Die()
+        {
+            Destroy(gameObject);
         }
     }
 }

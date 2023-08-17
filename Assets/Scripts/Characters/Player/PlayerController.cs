@@ -144,7 +144,7 @@ namespace Scrapyard.core.character
             if (weapon == null)
                 return;
 
-            Vector3 dir = _mouseLastHit.point - transform.position;
+            Vector3 dir = _mouseLastHit.point - weapon.end.position;
             dir.y = 0;
             dir.Normalize();
 

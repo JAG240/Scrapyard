@@ -7,6 +7,7 @@ namespace Scrapyard.services
         protected virtual void Awake()
         {
             Register();
+            DontDestroyOnLoad(this);
         }
 
         protected abstract void Register();

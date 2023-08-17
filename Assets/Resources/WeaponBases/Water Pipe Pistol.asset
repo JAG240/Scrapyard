@@ -24,6 +24,6 @@ MonoBehaviour:
   <magSize>k__BackingField: 6
   <type>k__BackingField: 0
   <baseType>k__BackingField: 2
-  <ammoType>k__BackingField: 2
+  <ammoType>k__BackingField: 1
   <model>k__BackingField: {fileID: 0}
   <fireMode>k__BackingField: 0
