@@ -57,13 +57,15 @@ namespace Scrapyard.core.character
             stamina = maxStamina;
         }
 
-        public void TakeDamage(float sharpDamage, float bluntDamage)
+        public float TakeDamage(float sharpDamage, float bluntDamage)
         {
-            health -= sharpDamage + bluntDamage;
+            float damage = sharpDamage + bluntDamage;
+            health -= damage;
 
             if (health <= 0f)
                 Die();
 
+            return damage;
         }
 
         private void Die()

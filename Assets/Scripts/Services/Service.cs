@@ -7,7 +7,9 @@ namespace Scrapyard.services
         protected virtual void Awake()
         {
             Register();
-            DontDestroyOnLoad(this);
+            
+            if(transform.parent == null)
+                DontDestroyOnLoad(this);
         }
 
         protected abstract void Register();

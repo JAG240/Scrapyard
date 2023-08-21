@@ -1,5 +1,6 @@
 using Scrapyard.core;
 using Scrapyard.core.character;
+using Scrapyard.services;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,9 +19,9 @@ namespace Scrapyard.items.weapons
         private float bluntDamage;
 
         private float maxAccuracy = 10f;
-        private float maxSpread = 0.5f;
+        private float maxSpread = 0.35f;
 
-        private TrailRenderer trail;
+        [SerializeField] private TrailRenderer trail;
 
         public virtual void Init(Weapon weapon, Vector3 dir, Team team)
         {
@@ -54,7 +55,7 @@ namespace Scrapyard.items.weapons
 
         protected virtual void Start()
         {
-            trail = GetComponent<TrailRenderer>();
+            trail = GetComponentInChildren<TrailRenderer>();
             startPos = transform.position;
             rigidBody = GetComponent<Rigidbody>();
         }
@@ -66,22 +67,17 @@ namespace Scrapyard.items.weapons
 
             if(Vector3.Distance(transform.position, startPos) >= range && !atRange)
             {
-                float randDropoff = Random.Range(4f, 6f);
-                //rigidBody.velocity = dir * (speed / randDropoff);
+                float randDropoff = Random.Range(2f, 3f);
+                rigidBody.velocity = dir * (speed / randDropoff);
                 StopBullet();
             }
         }
 
         protected virtual IEnumerator StartDespawn()
         {
-            float timer = 0f;
-            while(timer < 10f)
-            {
-                timer += Time.deltaTime;
-                yield return null;
-            }
+            yield return new WaitForSeconds(10f);
 
-            timer = 0f;
+            float timer = 0f;
             while(timer < 1.5f)
             {
                 timer += Time.deltaTime;
@@ -108,8 +104,6 @@ namespace Scrapyard.items.weapons
             if (atRange)
                 return;
 
-            Debug.Log(collision.impulse.magnitude);
-
             StopBullet();
 
             Character character = collision.gameObject.GetComponent<Character>();
@@ -117,7 +111,8 @@ namespace Scrapyard.items.weapons
             if (character == null)
                 return;
 
-            character.TakeDamage(sharpDamage, bluntDamage);
+            float damage = character.TakeDamage(sharpDamage, bluntDamage);
+            ServiceLocator.Resolve<UIManager>().splashController.NewSplash(character.transform.position, damage);
         }
     }
 

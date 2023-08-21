@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
   <bluntDamage>k__BackingField: 0
-  <sharpDamage>k__BackingField: 0
+  <sharpDamage>k__BackingField: 10
   <accuracy>k__BackingField: 2
   <reloadSpeed>k__BackingField: 2
   <modSlots>k__BackingField: 0
