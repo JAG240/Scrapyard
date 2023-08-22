@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <type>k__BackingField: 2
   <bullet>k__BackingField: {fileID: 8922156915792575233, guid: e4942c86e232bc542be3d4a2b8dd5f74, type: 3}
+  <bulletImage>k__BackingField: {fileID: 21300000, guid: bc3b9054f2a377d489d4fb54efb5bbcb, type: 3}

@@ -55,6 +55,11 @@ namespace Scrapyard.core.character
 
             equippedWeapons[slot] = weapon;
 
+            if (slot == 0)
+                ServiceLocator.Resolve<ReloadCanvas>().weapon = weapon;
+
+            ServiceLocator.Resolve<UIManager>().characterCanvas.ChangeWeapon(slot, weapon);
+
             weapon.model = ServiceLocator.Resolve<WeaponBuilder>().BuildWeaponModel(weapon);
 
             UpdateWeaponModels();
@@ -125,7 +130,7 @@ namespace Scrapyard.core.character
             Weapon weapon = o as Weapon;
             Item item = o as Item;
 
-            if (item == null || weapon == null)
+            if (item == null && weapon == null)
             {
                 ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, "Cannot add object to inventory, it is not a weapon or item");
                 return false;

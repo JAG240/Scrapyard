@@ -12,11 +12,12 @@ public class SplashBehavior : MonoBehaviour
 
     private Color numberColor;
     private float life = 0f;
-
+    private Vector3 startPos;
     public void Init(float num)
     {
         damageNumber.text = num.ToString();
         numberColor = Color.white;
+        startPos = transform.position;
     }
 
     private void Update()
@@ -42,6 +43,9 @@ public class SplashBehavior : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
         Vector3 newPos = transform.position;
         newPos.y = curve.Evaluate(life / lifeTime) * curveMax;
+
+        newPos.x = CustomFunctions.Lerp(startPos.x, startPos.x + 1f, life / lifeTime);
+
         transform.position = newPos;
     }
 }

@@ -7,6 +7,8 @@ namespace Scrapyard.core.character
 {
     public abstract class Player : Character
     {
+        [SerializeField] private ReloadCanvas reloadCanvas;
+
         protected CameraFollow _cameraFollow;
 
         override protected void Start()

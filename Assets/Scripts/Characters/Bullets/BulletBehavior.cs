@@ -40,7 +40,7 @@ namespace Scrapyard.items.weapons
 
         private void LookAtDir()
         {
-            float angle = CustomFunctions.AngleBetweenPoints(transform.position, dir + transform.position);
+            float angle = CustomFunctions.AngleBetweenPoints(transform.position, transform.position + (dir * speed));
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
 
@@ -62,8 +62,11 @@ namespace Scrapyard.items.weapons
 
         protected virtual void Update()
         {
-            if(!atRange)
+            if (!atRange)
+            {
                 rigidBody.velocity = dir * speed;
+                LookAtDir();
+            }
 
             if(Vector3.Distance(transform.position, startPos) >= range && !atRange)
             {

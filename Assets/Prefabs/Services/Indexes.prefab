@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2317422681528473975}
   - component: {fileID: 3098743202805074668}
+  - component: {fileID: 7801963325081701498}
   m_Layer: 0
-  m_Name: ItemIndex
+  m_Name: Indexes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,3 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a4beaa3729df04da4fea11cfcd43eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7801963325081701498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8590763249390245920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6df57a46f32b2e4d8f20af24b7bc396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterList:
+  - {fileID: 7463925789657964460, guid: 195d0829f40204f428e62bbbfd82b0c1, type: 3}

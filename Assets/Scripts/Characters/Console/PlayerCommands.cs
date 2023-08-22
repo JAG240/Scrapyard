@@ -80,6 +80,12 @@ namespace Scrapyard.services.commands
 
         private void GiveDefault(string[] args)
         {
+            if(args[1] == null)
+            {
+                ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, "Default weapon type not found");
+                return;
+            }
+
             string type = args[1];
             type = type.ToLower();
 

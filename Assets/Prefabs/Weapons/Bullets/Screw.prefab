@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <team>k__BackingField: 0
+  trail: {fileID: 0}
 --- !u!65 &5049386955091821976
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Scrapyard.items.weapons
 {
@@ -9,5 +10,6 @@ namespace Scrapyard.items.weapons
     {
         [field: SerializeField] public AmmoType type { get; private set; }
         [field: SerializeField] public GameObject bullet { get; private set; }
+        [field: SerializeField] public Sprite bulletImage { get; private set; }
     }
 }

@@ -152,6 +152,16 @@ namespace Scrapyard.core.character
                 Shoot(weapon, weapon.end.position, dir);
         }
 
+        public void OnReload()
+        {
+            Weapon weapon = inventory.equippedWeapons[0];
+
+            if (weapon == null)
+                return;
+
+            weapon.Reload();
+        }
+
         public void OnEnableLook(InputValue value)
         {
             float state = value.Get<float>();

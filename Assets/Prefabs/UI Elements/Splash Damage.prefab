@@ -86,7 +86,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &2117073891849618793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,17 +120,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 6.792453
-      outSlope: 6.792453
+      time: -0.0041656494
+      value: 0.99765015
+      inSlope: 7.363127
+      outSlope: 7.363127
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.01673613
+      outWeight: 0.064426936
     - serializedVersion: 3
-      time: 0.9958496
-      value: -0.0000074133277
+      time: 0.5041809
+      value: 0.0070650578
       inSlope: -0.0028109208
       outSlope: -0.0028109208
       tangentMode: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   lifeTime: 1
-  curveMax: 3
+  curveMax: 2
   damageNumber: {fileID: 353871793075535611}
 --- !u!1 &8951417924092388924
 GameObject:

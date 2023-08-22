@@ -19,6 +19,7 @@ namespace Scrapyard.items.weapons
         public bool isComplete { get; protected set; } = false;
         public bool onCooldown { get; protected set; } = false;
         public bool isReloading { get; protected set; } = false;
+        public float reloadTimer { get; private set; } = 0f;
 
         public WeaponBase weaponBase { get; protected set; }
         public GameObject bullet { get; set; }
@@ -29,7 +30,6 @@ namespace Scrapyard.items.weapons
         private float maxFireTime = 2f;
 
         private float cooldownTimer = 0f;
-        private float reloadTimer = 0f;
 
         public Weapon(WeaponBase weaponBase, WeaponPart[] weaponParts)
         {
@@ -60,7 +60,7 @@ namespace Scrapyard.items.weapons
 
         public void Reload()
         {
-            if(magSize > 0 && curMag < magSize)
+            if(magSize > 0 && curMag < magSize && !isReloading)
             {
                 reloadTimer = 0f;
                 isReloading = true;
