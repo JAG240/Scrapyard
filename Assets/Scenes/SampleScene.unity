@@ -213,7 +213,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &414280076
 GameObject:
@@ -281,7 +281,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &616772933 stripped
 Transform:
@@ -404,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5934050568201256311, guid: 2ce4aa8192b0b1847bf06e4697247980, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5934050568201256311, guid: 2ce4aa8192b0b1847bf06e4697247980, type: 3}
       propertyPath: m_LocalPosition.x
@@ -463,13 +463,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3819536092151328101, guid: 0942904266aa9fb4a9a3bd0a23598e0d, type: 3}
-      propertyPath: dodgeSpeed
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 6776028984633215998, guid: 0942904266aa9fb4a9a3bd0a23598e0d, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6776028984633215998, guid: 0942904266aa9fb4a9a3bd0a23598e0d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -530,7 +526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1854439894243645523, guid: bd500191d903463498bfa4eb3ca9765e, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1854439894243645523, guid: bd500191d903463498bfa4eb3ca9765e, type: 3}
       propertyPath: m_LocalPosition.x

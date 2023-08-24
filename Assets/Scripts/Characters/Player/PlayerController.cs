@@ -41,6 +41,9 @@ namespace Scrapyard.core.character
             Move();
             ApplyGravity();
             Rotate();
+            UpdateBottomRotation(_controllerMove);
+            RotateTire(_doding, _controllerMove);
+            UpdateLean(_controllerMove);
         }
 
         private void Rotate()
