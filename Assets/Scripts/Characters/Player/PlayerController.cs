@@ -22,7 +22,6 @@ namespace Scrapyard.core.character
         private bool _enableLook = false;
         private RaycastHit _mouseLastHit;
 
-        private Vector3 _mousePos;
         private float _timeCount = 0.0f;
 
         private bool _inConsole = false;
@@ -48,10 +47,8 @@ namespace Scrapyard.core.character
 
         private void Rotate()
         {
-            if (Input.mousePosition == _mousePos && overrideLookTo == null || !_allowMovement || _enableLook)
+            if (!_allowMovement || _enableLook)
                 return;
-
-            _mousePos = Input.mousePosition;
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out _mouseLastHit, 100))

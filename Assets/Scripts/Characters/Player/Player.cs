@@ -44,16 +44,18 @@ namespace Scrapyard.core.character
             Vector3 lean = new Vector3(0f, transform.rotation.eulerAngles.y, 0f);
 
             if (dir.y > 0)
-                lean.x = leanAngle;
-            else if (dir.y < 0)
                 lean.x = -leanAngle;
+            else if (dir.y < 0)
+                lean.x = leanAngle;
 
             if (dir.x > 0f)
-                lean.z = -leanAngle;
-            else if (dir.x < 0f)
                 lean.z = leanAngle;
+            else if (dir.x < 0f)
+                lean.z = -leanAngle;
 
-            transform.rotation = Quaternion.Euler(lean);
+            Quaternion rot = Quaternion.Inverse(Quaternion.Euler(lean)) * Quaternion.Euler(transform.right);
+            rot = Quaternion.Euler(rot.eulerAngles.x, transform.rotation.eulerAngles.y, rot.eulerAngles.z);
+            transform.rotation = rot;
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Scrapyard.core.character;
 using Scrapyard.services.commands;
+using UnityEngine.InputSystem;
 
 namespace Scrapyard.services
 {
@@ -14,6 +15,8 @@ namespace Scrapyard.services
         [SerializeField] private RectTransform _scroll;
 
         private List<ConsoleCommand> commands = new List<ConsoleCommand>();
+        private string[] _commandMemory = new string[10];
+        private int _memoryIndex = 0;
 
         protected override void Awake()
         {
@@ -71,6 +74,20 @@ namespace Scrapyard.services
             }
         }
 
+        public void OnNavConsoleMemory(InputValue value)
+        {
+            int newIndex = (int)value.Get<float>();
+
+            if (_memoryIndex + newIndex > 9)
+                _memoryIndex = 0;
+            else if (_memoryIndex + newIndex < 0)
+                _memoryIndex = 9;
+
+            _memoryIndex += (int)value.Get<float>();
+
+            _commandConsole.text = _commandMemory[_memoryIndex];
+        }
+
         public void EnterCommand()
         {
             string command = _commandConsole.text;
@@ -82,6 +99,13 @@ namespace Scrapyard.services
 
             if (command == string.Empty)
                 return;
+
+            _commandMemory[_memoryIndex] = command.TrimEnd('\n');
+
+            if (_memoryIndex == 9)
+                _memoryIndex = 0;
+            else
+                _memoryIndex++;
 
             Log(LogType.LOG, command);
             _commandConsole.text = string.Empty;
