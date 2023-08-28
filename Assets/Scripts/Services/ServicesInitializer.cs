@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,14 +10,16 @@ namespace Scrapyard.services
 
         void Start()
         {
-            Init();
+            StartCoroutine(Init());
         }
 
-        private void Init()
+        private IEnumerator Init()
         {
             foreach(GameObject service in services)
             {
-                Instantiate(service);
+                GameObject newObj = Instantiate(service);
+                Service s = newObj.GetComponent<Service>();
+                yield return new WaitUntil(() => s.Registered);
             }
 
             Destroy(gameObject);

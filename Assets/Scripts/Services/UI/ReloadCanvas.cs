@@ -25,6 +25,7 @@ namespace Scrapyard.services
             player = GameObject.Find("Player");
 
             ServiceLocator.Register<ReloadCanvas>(this);
+            Registered = true;
         }
 
         private void Update()

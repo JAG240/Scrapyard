@@ -13,6 +13,7 @@ namespace Scrapyard.services
         protected override void Register()
         {
             ServiceLocator.Register<UIManager>(this);
+            Registered = true;
         }
     }
 }

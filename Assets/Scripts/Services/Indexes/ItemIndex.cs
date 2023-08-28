@@ -74,6 +74,7 @@ namespace Scrapyard.services
         {
             Index();
             ServiceLocator.Register<ItemIndex>(this);
+            Registered = true;
         }
     }
 }

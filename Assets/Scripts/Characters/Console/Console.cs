@@ -17,6 +17,7 @@ namespace Scrapyard.services
         private List<ConsoleCommand> commands = new List<ConsoleCommand>();
         private string[] _commandMemory = new string[10];
         private int _memoryIndex = 0;
+        private GameEvent triggerConsole;
 
         protected override void Awake()
         {
@@ -32,11 +33,15 @@ namespace Scrapyard.services
         protected override void Register()
         {
             commands = CustomFunctions.CreateInstances<ConsoleCommand>();
-            ServiceLocator.serviceRegistered += LogReserviceRegister;
+            ServiceLocator.serviceRegistered += LogServiceRegister;
+
+            triggerConsole = ServiceLocator.Resolve<GameEvents>().Get("ToggleConsole");
+            triggerConsole.gameEvent += OnConsole;
+
             ServiceLocator.Register<Console>(this);
         }
 
-        private void LogReserviceRegister(string serviceName)
+        private void LogServiceRegister(string serviceName)
         {
             Log(LogType.LOG, $"Service registered: {serviceName}");
         }

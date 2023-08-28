@@ -22,6 +22,7 @@ namespace Scrapyard.services
         {
             modelBuilders = CustomFunctions.CreateInstances<ModelBuilder>();
             ServiceLocator.Register<WeaponBuilder>(this);
+            Registered = true;
         }
 
         public GameObject BuildWeaponModel(Weapon weapon)

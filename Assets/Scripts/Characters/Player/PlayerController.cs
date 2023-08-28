@@ -25,6 +25,7 @@ namespace Scrapyard.core.character
         private float _timeCount = 0.0f;
 
         private bool _inConsole = false;
+        private bool _inInventory = false;
 
         public Transform overrideLookTo;
 
@@ -123,9 +124,25 @@ namespace Scrapyard.core.character
 
         public void OnConsole()
         {
+            if (_inInventory)
+                return;
+
             _inConsole = !_inConsole;
 
             if (_inConsole)
+                DisableMovement();
+            else
+                EnableMovement();
+        }
+
+        public void OnInventoryToggle()
+        {
+            if (_inConsole)
+                return;
+
+            _inInventory = !_inInventory;
+
+            if (_inInventory)
                 DisableMovement();
             else
                 EnableMovement();
@@ -135,8 +152,6 @@ namespace Scrapyard.core.character
         {
             if (!_allowMovement)
                 return;
-
-            //TODO:Handle melee attacks, there will be no bullets or ends
 
             float state = value.Get<float>();
             Weapon weapon = inventory.equippedWeapons[0];

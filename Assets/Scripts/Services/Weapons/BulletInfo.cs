@@ -11,6 +11,7 @@ namespace Scrapyard.services
         protected override void Register()
         {
             ServiceLocator.Register<BulletInfo>(this);
+            Registered = true;
         }
 
         public GameObject GetBulletMesh(AmmoType ammoType)

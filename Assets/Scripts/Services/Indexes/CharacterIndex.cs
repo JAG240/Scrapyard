@@ -18,6 +18,7 @@ namespace Scrapyard.services
             }
 
             ServiceLocator.Register<CharacterIndex>(this);
+            Registered = true;
         }
 
         public GameObject Get(string name)
