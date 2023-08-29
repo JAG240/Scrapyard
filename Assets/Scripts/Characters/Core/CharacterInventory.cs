@@ -123,7 +123,7 @@ namespace Scrapyard.core.character
             return AddToInventorySlot(o, slot);
         }
 
-        public bool AddToInventorySlot<T>(T o, int slot)
+        public bool AddToInventorySlot(object o, int slot)
         {
             //TODO: Item stacks may be implemented 
             //TODO: Bug may exists with these castings below
@@ -146,6 +146,17 @@ namespace Scrapyard.core.character
             inventory[slot] = o;
 
             return true;
+        }
+
+        public Sprite GetSprite(int i)
+        {
+            if(inventory[i].GetType() == typeof(Item))
+            {
+                Item item = (Item)inventory[i];
+                return item.sprite;
+            }
+
+            return null;
         }
     }
 }

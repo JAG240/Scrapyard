@@ -3,39 +3,102 @@ using Scrapyard.services;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using Scrapyard.items;
 
 namespace Scrapyard.UI 
 {
     public class InventoryController : MonoBehaviour
     {
+        [Header("References")]
         [SerializeField] private RectTransform panel;
+        [SerializeField] private RectTransform InvGrid;
+
+        [Header("Prefabs")]
+        [SerializeField] private GameObject InvSlot;
+        [SerializeField] private GameObject InvItemDisplay;
 
         private CharacterInventory _characterInventory;
         private GameEvent toggleInventory;
-        private GameEvent toggleConsole;
         private bool _isVisible = false;
-        private bool _inConsole = false;
-
-        //TODO: Explore option of creating a serivice that tracks the state of the player menus. Reduce boolean storage like ^ and make it global to reduce syncing failures
+        private object _dragging;
+        private UIManager uiManager;
 
         private void Start()
         {
             _characterInventory = GameObject.Find("Player").GetComponent<Character>().inventory;
             toggleInventory = ServiceLocator.Resolve<GameEvents>().Get("ToggleInventory");
-            toggleConsole = ServiceLocator.Resolve<GameEvents>().Get("ToggleConsole");
+            uiManager = ServiceLocator.Resolve<UIManager>();
             toggleInventory.gameEvent += Toggle;
-            toggleConsole.gameEvent += () => { _inConsole = !_inConsole; };
         }
 
         private void Toggle()
         {
-            if (_inConsole)
+            if (uiManager.inConsole)
                 return;
 
             _isVisible = !_isVisible;
 
+            if (_isVisible)
+            {
+                LoadItems();
+            }
+            else
+            {
+                UnloadItems();
+            }
+
             panel.gameObject.SetActive(_isVisible);
+        }
+
+        private void LoadItems()
+        {
+            int size = _characterInventory.inventory.Length;
+
+            for(int i = 0; i < size; i++)
+            {
+                GameObject newSlot = Instantiate(InvSlot, InvGrid);
+                InvItemSlot slot = newSlot.GetComponent<InvItemSlot>();
+
+                slot.inventoryController = this;
+                slot.slotID = i;
+
+                if(_characterInventory.inventory[i] != null)
+                {
+                    GameObject newItem = Instantiate(InvItemDisplay, newSlot.transform);
+                    InvItemDisplay item = newItem.GetComponent<InvItemDisplay>();
+                    Sprite sprite = _characterInventory.GetSprite(i);
+
+                    item.slot = i;
+                    item.inventoryController = this;
+
+                    if(sprite != null)
+                        newItem.GetComponent<Image>().sprite = sprite;
+                }
+            }
+        }
+
+        private void UnloadItems()
+        {
+            foreach(Transform slot in InvGrid.transform)
+                Destroy(slot.gameObject);
+        }
+
+        public bool AddItem(int slot)
+        {
+            return _characterInventory.AddToInventorySlot(_dragging, slot);
+        }
+
+        public bool RemoveItem(int slot)
+        {
+            _dragging = _characterInventory.inventory[slot];
+            _characterInventory.inventory[slot] = null;
+
+            if(_dragging != null)
+                return true;
+
+            return false;
         }
     }
 }

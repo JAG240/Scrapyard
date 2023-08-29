@@ -21,7 +21,7 @@ namespace Scrapyard.services.modelbuilders
             GameObject newBase = weapon.weaponBase.model;
 
             if (newBase == null)
-                newBase = ServiceLocator.Resolve<ItemIndex>().Get<WeaponBase>("Default Melee").model;
+                newBase = ServiceLocator.Resolve<ItemIndex>().Get<WeaponBase>("default melee").model;
 
             GameObject newWeaponBase = Object.Instantiate(newBase, Vector3.zero, Quaternion.identity);
 
@@ -32,7 +32,7 @@ namespace Scrapyard.services.modelbuilders
             GameObject end = melee.meleeEnd.model;
 
             if (end == null)
-                end = ServiceLocator.Resolve<ItemIndex>().Get<WeaponPart>("Default Blade").model;
+                end = ServiceLocator.Resolve<ItemIndex>().Get<WeaponPart>("default blade").model;
 
             end = Object.Instantiate(end, Vector3.zero, Quaternion.identity);
 

@@ -35,9 +35,6 @@ namespace Scrapyard.services
             commands = CustomFunctions.CreateInstances<ConsoleCommand>();
             ServiceLocator.serviceRegistered += LogServiceRegister;
 
-            triggerConsole = ServiceLocator.Resolve<GameEvents>().Get("ToggleConsole");
-            triggerConsole.gameEvent += OnConsole;
-
             ServiceLocator.Register<Console>(this);
         }
 

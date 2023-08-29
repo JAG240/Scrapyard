@@ -36,7 +36,7 @@ namespace Scrapyard.services
             {
                 T o = (T)obj;
                 ScriptableObject scrO = (ScriptableObject)obj;
-                list.Add(scrO.name, o);
+                list.Add(scrO.name.ToLower(), o);
             }
         }
 

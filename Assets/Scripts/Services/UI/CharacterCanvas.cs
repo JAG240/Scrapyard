@@ -25,7 +25,7 @@ namespace Scrapyard.UI
             else
                 secondary = weapon;
 
-            BulletBase bulletBase = ServiceLocator.Resolve<ItemIndex>().Get<BulletBase>(weapon.weaponBase.ammoType.ToString());
+            BulletBase bulletBase = ServiceLocator.Resolve<ItemIndex>().Get<BulletBase>(weapon.weaponBase.ammoType.ToString().ToLower());
             primaryType.sprite = bulletBase.bulletImage;
             primaryType.color = Color.white;
         }

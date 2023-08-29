@@ -34,8 +34,6 @@ namespace Scrapyard.services.commands
             WeaponBase weaponBase = null;
             List<WeaponPart> weaponParts = new List<WeaponPart>();
 
-            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-
             foreach(string arg in args)
             {
 
@@ -45,7 +43,6 @@ namespace Scrapyard.services.commands
                     string name = arg.Substring(nameStart, arg.Length - nameStart - 1);
                     name = name.Trim();
                     name = name.ToLower();
-                    name = textInfo.ToTitleCase(name);
 
                     weaponBase = ServiceLocator.Resolve<ItemIndex>().Get<WeaponBase>(name);
                 }
@@ -57,8 +54,7 @@ namespace Scrapyard.services.commands
 
                     foreach(string name in partNames)
                     {
-                        name.ToLower();
-                        string prepName = textInfo.ToTitleCase(name);
+                        string prepName = name.ToLower();
                         prepName = prepName.Trim();
 
                         WeaponPart part = ServiceLocator.Resolve<ItemIndex>().Get<WeaponPart>(prepName);
@@ -92,14 +88,14 @@ namespace Scrapyard.services.commands
             if(type.Contains("gun"))
             {
                 ItemIndex index = ServiceLocator.Resolve<ItemIndex>();
-                Weapon weapon = ServiceLocator.Resolve<WeaponBuilder>().BuildWeapon(index.Get<WeaponBase>("Default Gun") , new WeaponPart[] { index.Get<WeaponPart>("Default Grip"), index.Get<WeaponPart>("Default Barrel") });
+                Weapon weapon = ServiceLocator.Resolve<WeaponBuilder>().BuildWeapon(index.Get<WeaponBase>("default gun") , new WeaponPart[] { index.Get<WeaponPart>("default grip"), index.Get<WeaponPart>("default barrel") });
                 _player.inventory.equipWeapon(0, weapon);
                 ServiceLocator.Resolve<services.Console>().Log(services.LogType.LOG, "Weapon added to primary slot");
             }
             else if (type.Contains("melee"))
             {
                 ItemIndex index = ServiceLocator.Resolve<ItemIndex>();
-                Weapon weapon = ServiceLocator.Resolve<WeaponBuilder>().BuildWeapon(index.Get<WeaponBase>("Default Melee"), new WeaponPart[] { index.Get<WeaponPart>("Default Blade") });
+                Weapon weapon = ServiceLocator.Resolve<WeaponBuilder>().BuildWeapon(index.Get<WeaponBase>("default melee"), new WeaponPart[] { index.Get<WeaponPart>("default blade") });
                 _player.inventory.equipWeapon(0, weapon);
                 ServiceLocator.Resolve<services.Console>().Log(services.LogType.LOG, "Weapon added to primary slot");
             }
@@ -114,6 +110,32 @@ namespace Scrapyard.services.commands
         {
             _player.inventory.Clear();
             ServiceLocator.Resolve<services.Console>().Log(services.LogType.LOG, "Player Inventory cleared");
+        }
+
+        private void GiveItem(string[] args)
+        {
+            string ItemName = args[1];
+            ItemName = ItemName.Trim('\n', ' ');
+            ItemName.ToLower();
+
+            Item item = ServiceLocator.Resolve<ItemIndex>().Get<Item>(ItemName);
+            if (item == null || !_player.inventory.AddToInventory(item))
+                ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, "Cannot Add Item To Inventory");
+            else
+                ServiceLocator.Resolve<services.Console>().Log(services.LogType.LOG, $"Added {item.name} To Player Inventory");
+
+        }
+
+        private void ShowInv(string[] args)
+        {
+            int i = 0;
+
+            foreach(object o in _player.inventory.inventory)
+            {
+                string name = o != null ? o.ToString() : "Empty";
+                ServiceLocator.Resolve<services.Console>().Log(services.LogType.LOG, $"{i} : {name}");
+                i++;
+            }
         }
     }
 }

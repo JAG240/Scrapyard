@@ -21,7 +21,7 @@ namespace Scrapyard.services.modelbuilders
             GameObject newBase = weapon.weaponBase.model;
 
             if (newBase == null) { }
-                newBase = ServiceLocator.Resolve<ItemIndex>().Get<WeaponBase>("Default Gun").model;
+                newBase = ServiceLocator.Resolve<ItemIndex>().Get<WeaponBase>("default gun").model;
 
             GameObject newWeaponBase = Object.Instantiate(newBase, Vector3.zero, Quaternion.identity);
 
@@ -32,12 +32,12 @@ namespace Scrapyard.services.modelbuilders
             GameObject grip = gun.grip.model;
 
             if (grip == null)
-                grip = ServiceLocator.Resolve<ItemIndex>().Get<WeaponPart>("Default Grip").model;
+                grip = ServiceLocator.Resolve<ItemIndex>().Get<WeaponPart>("default grip").model;
 
             GameObject barrel = gun.barrel.model;
 
             if (barrel == null)
-                barrel = ServiceLocator.Resolve<ItemIndex>().Get<WeaponPart>("Default Barrel").model;
+                barrel = ServiceLocator.Resolve<ItemIndex>().Get<WeaponPart>("default barrel").model;
 
             grip = Object.Instantiate(grip, Vector3.zero, Quaternion.identity);
             barrel = Object.Instantiate(barrel, Vector3.zero, Quaternion.identity);

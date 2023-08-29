@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4689c138ed5d6349a163c63b9fc3efd, type: 3}
   m_Name: Rusty Pipe
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  <sprite>k__BackingField: {fileID: 21300000, guid: 13b8a15193b35354bbed919e245a0eaf, type: 3}

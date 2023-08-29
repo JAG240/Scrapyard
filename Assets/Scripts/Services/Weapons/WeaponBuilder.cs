@@ -53,7 +53,7 @@ namespace Scrapyard.services
             Assembly asm = typeof(Weapon).Assembly;
             Type type = asm.GetType("Scrapyard.items.weapons." + weaponBase.type.ToString());
             Weapon weapon = (Weapon)Activator.CreateInstance(type, weaponBase, weaponParts);
-            weapon.bullet = ServiceLocator.Resolve<ItemIndex>().Get<BulletBase>(weaponBase.ammoType.ToString()).bullet;
+            weapon.bullet = ServiceLocator.Resolve<ItemIndex>().Get<BulletBase>(weaponBase.ammoType.ToString().ToLower()).bullet;
             return weapon;
         }
 
