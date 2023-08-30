@@ -37,6 +37,7 @@ namespace Scrapyard.UI
         {
             draggable = false;
             transform.SetParent(currentParent);
+            inventoryController.AddItem(slot);
             image.raycastTarget = true;
         }
 

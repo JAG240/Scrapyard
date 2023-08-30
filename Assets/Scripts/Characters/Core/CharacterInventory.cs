@@ -147,16 +147,5 @@ namespace Scrapyard.core.character
 
             return true;
         }
-
-        public Sprite GetSprite(int i)
-        {
-            if(inventory[i].GetType() == typeof(Item))
-            {
-                Item item = (Item)inventory[i];
-                return item.sprite;
-            }
-
-            return null;
-        }
     }
 }

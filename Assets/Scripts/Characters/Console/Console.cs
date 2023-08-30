@@ -17,7 +17,6 @@ namespace Scrapyard.services
         private List<ConsoleCommand> commands = new List<ConsoleCommand>();
         private string[] _commandMemory = new string[10];
         private int _memoryIndex = 0;
-        private GameEvent triggerConsole;
 
         protected override void Awake()
         {

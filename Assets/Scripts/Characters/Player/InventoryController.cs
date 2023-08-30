@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Scrapyard.items;
+using Scrapyard.items.weapons;
 
 namespace Scrapyard.UI 
 {
@@ -18,6 +19,7 @@ namespace Scrapyard.UI
         [Header("Prefabs")]
         [SerializeField] private GameObject InvSlot;
         [SerializeField] private GameObject InvItemDisplay;
+        [SerializeField] private Sprite weaponIcon;
 
         private CharacterInventory _characterInventory;
         private GameEvent toggleInventory;
@@ -60,15 +62,13 @@ namespace Scrapyard.UI
             {
                 GameObject newSlot = Instantiate(InvSlot, InvGrid);
                 InvItemSlot slot = newSlot.GetComponent<InvItemSlot>();
-
-                slot.inventoryController = this;
                 slot.slotID = i;
 
                 if(_characterInventory.inventory[i] != null)
                 {
                     GameObject newItem = Instantiate(InvItemDisplay, newSlot.transform);
                     InvItemDisplay item = newItem.GetComponent<InvItemDisplay>();
-                    Sprite sprite = _characterInventory.GetSprite(i);
+                    Sprite sprite = GetInventorySprite(i);
 
                     item.slot = i;
                     item.inventoryController = this;
@@ -77,6 +77,23 @@ namespace Scrapyard.UI
                         newItem.GetComponent<Image>().sprite = sprite;
                 }
             }
+        }
+
+        private Sprite GetInventorySprite(int i)
+        {
+            object[] inventory = _characterInventory.inventory;
+
+            if (inventory[i].GetType() == typeof(Item))
+            {
+                Item item = (Item)inventory[i];
+                return item.sprite;
+            }
+            else if (inventory[i].GetType() == typeof(Weapon))
+            {
+                return weaponIcon;
+            }
+
+            return null;
         }
 
         private void UnloadItems()

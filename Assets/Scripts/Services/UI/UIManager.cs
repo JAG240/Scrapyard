@@ -21,11 +21,27 @@ namespace Scrapyard.services
             toggleInventory = ServiceLocator.Resolve<GameEvents>().Get("ToggleInventory");
             toggleConsole = ServiceLocator.Resolve<GameEvents>().Get("ToggleConsole");
 
-            toggleInventory.gameEvent += () => { inInventory = !inInventory; };
-            toggleConsole.gameEvent += () => { inConsole = !inConsole; };
+            toggleInventory.gameEvent += ToggleInventory;
+            toggleConsole.gameEvent += ToggleConsole;
 
             ServiceLocator.Register<UIManager>(this);
             Registered = true;
+        }
+
+        private void ToggleInventory()
+        {
+            if (inConsole)
+                return;
+
+            inInventory = !inInventory;
+        }
+
+        private void ToggleConsole()
+        {
+            if (inInventory)
+                return;
+
+            inConsole = !inConsole;
         }
     }
 }
