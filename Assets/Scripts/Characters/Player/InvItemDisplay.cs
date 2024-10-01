@@ -14,10 +14,11 @@ namespace Scrapyard.UI
         [HideInInspector] public Transform currentParent;
         public InventoryController inventoryController;
         public int slot;
+        public InvItemDisplayType invType;
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (!inventoryController.RemoveItem(slot))
+            if (!inventoryController.StartDrag(slot, invType))
                 return;
 
             draggable = true;
@@ -37,7 +38,7 @@ namespace Scrapyard.UI
         {
             draggable = false;
             transform.SetParent(currentParent);
-            inventoryController.AddItem(slot);
+            inventoryController.EndDrag(slot, currentParent.GetComponent<InvItemDisplay>().invType);
             image.raycastTarget = true;
         }
 
@@ -45,5 +46,18 @@ namespace Scrapyard.UI
         {
             image = GetComponent<Image>();
         }
+
+        //TODO: Determine how we can check valid end drag before assigning new parent in InvItemSlot script
+        public bool ValidEndDrag()
+        {
+            return inventoryController.EndDrag(slot, currentParent.GetComponent<InvItemDisplay>().invType);
+        }
+    }
+
+    public enum InvItemDisplayType
+    {
+        Item, 
+        Weapon,
+        Gear
     }
 }

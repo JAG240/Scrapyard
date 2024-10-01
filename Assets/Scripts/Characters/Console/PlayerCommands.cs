@@ -76,9 +76,9 @@ namespace Scrapyard.services.commands
 
         private void GiveDefault(string[] args)
         {
-            if(args[1] == null)
+            if(args.Length < 2)
             {
-                ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, "Default weapon type not found");
+                ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, "Must pass default weapon type: EX: player.givedefault.gun");
                 return;
             }
 
@@ -114,6 +114,12 @@ namespace Scrapyard.services.commands
 
         private void GiveItem(string[] args)
         {
+            if (args.Length < 2)
+            {
+                ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, "Must pass item name: EX: player.giveitem.rusty pipe");
+                return;
+            }
+
             string ItemName = args[1];
             ItemName = ItemName.Trim('\n', ' ');
             ItemName.ToLower();

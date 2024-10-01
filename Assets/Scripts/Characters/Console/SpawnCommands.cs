@@ -18,9 +18,9 @@ namespace Scrapyard.services.commands
 
         private void Char(string[] args)
         {
-            if(args[1] == null)
+            if(args.Length < 2)
             {
-                ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, $"Character not found");
+                ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, $"Must define character name: EX: spawn.char.dummy");
                 return;
             }
 

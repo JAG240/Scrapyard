@@ -15,6 +15,8 @@ namespace Scrapyard.UI
         [Header("References")]
         [SerializeField] private RectTransform panel;
         [SerializeField] private RectTransform InvGrid;
+        [SerializeField] private RectTransform WeaponGrid;
+        [SerializeField] private RectTransform GearGrid;
 
         [Header("Prefabs")]
         [SerializeField] private GameObject InvSlot;
@@ -45,10 +47,12 @@ namespace Scrapyard.UI
             if (_isVisible)
             {
                 LoadItems();
+                LoadEquipment();
             }
             else
             {
                 UnloadItems();
+                UnloadEquipment();
             }
 
             panel.gameObject.SetActive(_isVisible);
@@ -72,11 +76,41 @@ namespace Scrapyard.UI
 
                     item.slot = i;
                     item.inventoryController = this;
+                    item.invType = InvItemDisplayType.Item;
 
                     if(sprite != null)
                         newItem.GetComponent<Image>().sprite = sprite;
                 }
             }
+        }
+
+        private void LoadEquipment()
+        {
+            int weaponCount = 0;
+
+            //Load weapons 
+            foreach(Weapon weapon in _characterInventory.equippedWeapons)
+            {
+                GameObject newSlot = Instantiate(InvSlot, WeaponGrid);
+                InvItemSlot slot = newSlot.GetComponent<InvItemSlot>();
+                slot.slotID = weaponCount;
+
+                if (_characterInventory.equippedWeapons[weaponCount] != null)
+                {
+                    GameObject newItem = Instantiate(InvItemDisplay, newSlot.transform);
+                    InvItemDisplay item = newItem.GetComponent<InvItemDisplay>();
+
+                    item.slot = weaponCount;
+                    item.inventoryController = this;
+                    item.invType = InvItemDisplayType.Weapon;
+
+                    newItem.GetComponent<Image>().sprite = weaponIcon;
+                }
+
+                weaponCount++;
+            }
+
+            //Load Gear
         }
 
         private Sprite GetInventorySprite(int i)
@@ -102,13 +136,22 @@ namespace Scrapyard.UI
                 Destroy(slot.gameObject);
         }
 
-        public bool AddItem(int slot)
+        private void UnloadEquipment()
+        {
+            foreach(Transform slot in WeaponGrid.transform)
+                Destroy(slot.gameObject);
+        }
+
+        public bool EndDrag(int slot, InvItemDisplayType type)
         {
             return _characterInventory.AddToInventorySlot(_dragging, slot);
         }
 
-        public bool RemoveItem(int slot)
+        public bool StartDrag(int slot, InvItemDisplayType type)
         {
+            if (_characterInventory.inventory[slot] == null)
+                return false;
+
             _dragging = _characterInventory.inventory[slot];
             _characterInventory.inventory[slot] = null;
 

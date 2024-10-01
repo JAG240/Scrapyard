@@ -5,6 +5,7 @@ using System;
 using Scrapyard.items;
 using Scrapyard.items.weapons;
 using Scrapyard.services;
+using UnityEditor.Graphs;
 
 namespace Scrapyard.core.character
 {
@@ -64,6 +65,12 @@ namespace Scrapyard.core.character
 
             UpdateWeaponModels();
 
+            return true;
+        }
+
+        public bool unequipWeapon(int slot)
+        {
+            //TODO: Create method to remove weapon from slot 
             return true;
         }
 

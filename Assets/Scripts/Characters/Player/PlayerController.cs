@@ -52,7 +52,7 @@ namespace Scrapyard.core.character
                 return;
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out _mouseLastHit, 100))
+            if(Physics.Raycast(ray, out _mouseLastHit, 100, LayerMask.GetMask("Ground")))
             {
                 float angle = overrideLookTo == null ? CustomFunctions.AngleBetweenPoints(_mouseLastHit.point, transform.position) : CustomFunctions.AngleBetweenPoints(overrideLookTo.position, transform.position);
                 Quaternion dest = Quaternion.Euler(new Vector3(0f, angle, 0f));
@@ -160,7 +160,6 @@ namespace Scrapyard.core.character
                 return;
 
             Vector3 dir = _mouseLastHit.point - weapon.end.position;
-            dir.y = 0;
             dir.Normalize();
 
             if (state == 1)
