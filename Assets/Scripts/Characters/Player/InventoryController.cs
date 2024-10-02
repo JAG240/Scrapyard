@@ -1,14 +1,14 @@
 using Scrapyard.core.character;
 using Scrapyard.services;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Scrapyard.items;
 using Scrapyard.items.weapons;
+using Scrapyard.UI;
+using System;
 
-namespace Scrapyard.UI 
+namespace Scrapyard.core
 {
     public class InventoryController : MonoBehaviour
     {
@@ -67,6 +67,7 @@ namespace Scrapyard.UI
                 GameObject newSlot = Instantiate(InvSlot, InvGrid);
                 InvItemSlot slot = newSlot.GetComponent<InvItemSlot>();
                 slot.slotID = i;
+                slot.slotType = InvItemSlot.SlotType.Item;
 
                 if(_characterInventory.inventory[i] != null)
                 {
@@ -74,9 +75,8 @@ namespace Scrapyard.UI
                     InvItemDisplay item = newItem.GetComponent<InvItemDisplay>();
                     Sprite sprite = GetInventorySprite(i);
 
-                    item.slot = i;
+                    item.slot = slot;
                     item.inventoryController = this;
-                    item.invType = InvItemDisplayType.Item;
 
                     if(sprite != null)
                         newItem.GetComponent<Image>().sprite = sprite;
@@ -88,21 +88,20 @@ namespace Scrapyard.UI
         {
             int weaponCount = 0;
 
-            //Load weapons 
             foreach(Weapon weapon in _characterInventory.equippedWeapons)
             {
                 GameObject newSlot = Instantiate(InvSlot, WeaponGrid);
                 InvItemSlot slot = newSlot.GetComponent<InvItemSlot>();
                 slot.slotID = weaponCount;
+                slot.slotType = InvItemSlot.SlotType.Weapon;
 
                 if (_characterInventory.equippedWeapons[weaponCount] != null)
                 {
                     GameObject newItem = Instantiate(InvItemDisplay, newSlot.transform);
                     InvItemDisplay item = newItem.GetComponent<InvItemDisplay>();
 
-                    item.slot = weaponCount;
+                    item.slot = slot;
                     item.inventoryController = this;
-                    item.invType = InvItemDisplayType.Weapon;
 
                     newItem.GetComponent<Image>().sprite = weaponIcon;
                 }
@@ -110,19 +109,21 @@ namespace Scrapyard.UI
                 weaponCount++;
             }
 
-            //Load Gear
+            //TODO: Load Gear
         }
 
         private Sprite GetInventorySprite(int i)
         {
             object[] inventory = _characterInventory.inventory;
 
+            //TODO: expland to include all types (Gun, Melee, Gear, etc.)
+
             if (inventory[i].GetType() == typeof(Item))
             {
                 Item item = (Item)inventory[i];
                 return item.sprite;
             }
-            else if (inventory[i].GetType() == typeof(Weapon))
+            else if (inventory[i].GetType() == typeof(Gun))
             {
                 return weaponIcon;
             }
@@ -142,23 +143,47 @@ namespace Scrapyard.UI
                 Destroy(slot.gameObject);
         }
 
-        public bool EndDrag(int slot, InvItemDisplayType type)
+        public bool EndDrag(int slot, InvItemSlot.SlotType type)
         {
-            return _characterInventory.AddToInventorySlot(_dragging, slot);
+            if (type == InvItemSlot.SlotType.Item)
+                return _characterInventory.AddToInventorySlot(_dragging, slot);
+            else if (type == InvItemSlot.SlotType.Weapon)
+                return _characterInventory.equipWeapon(slot, (Weapon)_dragging);
+            //TODO: add gear
+
+            return false;
         }
 
-        public bool StartDrag(int slot, InvItemDisplayType type)
+        public bool StartDrag(int slot, InvItemSlot.SlotType type)
         {
-            if (_characterInventory.inventory[slot] == null)
+            object[] collection = null;
+
+            if (type == InvItemSlot.SlotType.Item)
+                collection = _characterInventory.inventory;
+            else if (type == InvItemSlot.SlotType.Weapon)
+                collection = _characterInventory.equippedWeapons;
+            //TODO: add gear
+
+            if (collection[slot] == null)
                 return false;
 
-            _dragging = _characterInventory.inventory[slot];
-            _characterInventory.inventory[slot] = null;
+            _dragging = collection[slot];
+
+            if(type == InvItemSlot.SlotType.Item)
+                collection[slot] = null;
+
+            if(type == InvItemSlot.SlotType.Weapon)
+                _characterInventory.unequipWeapon(slot);
 
             if(_dragging != null)
                 return true;
 
             return false;
+        }
+
+        public Type GetItemType()
+        {
+            return _dragging.GetType();
         }
     }
 }

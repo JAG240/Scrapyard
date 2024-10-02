@@ -20,6 +20,7 @@ namespace Scrapyard.core.character
             base.Start();
 
             _cameraFollow = Camera.main.GetComponent<CameraFollow>();
+            StartCoroutine(CommandsAfterStart());
         }
 
         protected void UpdateBottomRotation(Vector2 direction)
@@ -56,6 +57,12 @@ namespace Scrapyard.core.character
             Quaternion rot = Quaternion.Inverse(Quaternion.Euler(lean)) * Quaternion.Euler(transform.right);
             rot = Quaternion.Euler(rot.eulerAngles.x, transform.rotation.eulerAngles.y, rot.eulerAngles.z);
             transform.rotation = rot;
+        }
+
+        private IEnumerator CommandsAfterStart()
+        {
+            yield return new WaitForSeconds(0.5f);
+            ServiceLocator.Resolve<Console>().SciptedCommand("player.givedebug.gun");
         }
     }
 }

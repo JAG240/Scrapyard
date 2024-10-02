@@ -6,6 +6,7 @@ using Scrapyard.items;
 using Scrapyard.items.weapons;
 using Scrapyard.services;
 using UnityEditor.Graphs;
+using static Codice.Client.Common.Connection.AskCredentialsToUser;
 
 namespace Scrapyard.core.character
 {
@@ -70,7 +71,12 @@ namespace Scrapyard.core.character
 
         public bool unequipWeapon(int slot)
         {
-            //TODO: Create method to remove weapon from slot 
+            if (slot == 0)
+                ServiceLocator.Resolve<ReloadCanvas>().weapon = null;
+
+            ServiceLocator.Resolve<UIManager>().characterCanvas.ChangeWeapon(slot, null);
+            ServiceLocator.Resolve<WeaponBuilder>().DestroyModel(equippedWeapons[slot]);
+            equippedWeapons[slot] = null;
             return true;
         }
 
@@ -79,10 +85,7 @@ namespace Scrapyard.core.character
             inventory = new object[inventory.Length];
             
             for(int i = 0; i < equippedWeapons.Length; i++)
-            {
-                ServiceLocator.Resolve<WeaponBuilder>().DestroyModel(equippedWeapons[i]);
-                equippedWeapons[i] = null;
-            }
+                unequipWeapon(i);
         }
 
         public void UpdateWeaponModels()

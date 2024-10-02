@@ -74,11 +74,11 @@ namespace Scrapyard.services.commands
 
         }
 
-        private void GiveDefault(string[] args)
+        private void GiveDebug(string[] args)
         {
             if(args.Length < 2)
             {
-                ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, "Must pass default weapon type: EX: player.givedefault.gun");
+                ServiceLocator.Resolve<services.Console>().Log(services.LogType.ERROR, "Must pass debug weapon type: EX: player.givedebug.gun");
                 return;
             }
 

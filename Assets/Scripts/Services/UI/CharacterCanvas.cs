@@ -20,14 +20,25 @@ namespace Scrapyard.UI
 
         public void ChangeWeapon(int slot, Weapon weapon)
         {
+            //TODO: expand to allow more than 2 weapon slots
+            Image updateType = slot == 0 ? primaryType : secondaryType;
+
             if (slot == 0)
                 primary = weapon;
             else
                 secondary = weapon;
 
+            if (weapon == null)
+            {
+                updateType.sprite = null;
+                updateType.color = Color.clear;
+                UpdateAmmoCount();
+                return;
+            }
+
             BulletBase bulletBase = ServiceLocator.Resolve<ItemIndex>().Get<BulletBase>(weapon.weaponBase.ammoType.ToString().ToLower());
-            primaryType.sprite = bulletBase.bulletImage;
-            primaryType.color = Color.white;
+            updateType.sprite = bulletBase.bulletImage;
+            updateType.color = Color.white;
         }
 
         private void Update()
@@ -38,15 +49,15 @@ namespace Scrapyard.UI
 
         private void UpdateAmmoCount()
         {
-            if(primary != null)
-            {
+            if (primary != null)
                 primaryAmmo.text = $"{primary.curMag}/{primary.magSize}";
-            }
+            else
+                primaryAmmo.text = string.Empty;
 
             if(secondary != null)
-            {
                 secondaryAmmo.text = $"{secondary.curMag}/{secondary.magSize}";
-            }
+            else
+                secondaryAmmo.text = string.Empty;
         }
     }
 }

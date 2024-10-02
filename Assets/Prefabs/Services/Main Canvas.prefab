@@ -720,8 +720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentParent: {fileID: 0}
   inventoryController: {fileID: 0}
-  slot: 0
-  invType: 2
+  slot: {fileID: 0}
 --- !u!1 &2274901276459704747
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,8 +812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentParent: {fileID: 0}
   inventoryController: {fileID: 0}
-  slot: 0
-  invType: 0
+  slot: {fileID: 0}
 --- !u!1 &2279734138190273890
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,8 +904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentParent: {fileID: 0}
   inventoryController: {fileID: 0}
-  slot: 0
-  invType: 0
+  slot: {fileID: 0}
 --- !u!1 &2628103084038212002
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,8 +2094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentParent: {fileID: 0}
   inventoryController: {fileID: 0}
-  slot: 0
-  invType: 0
+  slot: {fileID: 0}
 --- !u!1 &5204630898472412504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2770,8 +2766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentParent: {fileID: 0}
   inventoryController: {fileID: 0}
-  slot: 0
-  invType: 0
+  slot: {fileID: 0}
 --- !u!1 &6416112775775144611
 GameObject:
   m_ObjectHideFlags: 0
@@ -3088,8 +3083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentParent: {fileID: 0}
   inventoryController: {fileID: 0}
-  slot: 0
-  invType: 2
+  slot: {fileID: 0}
 --- !u!1 &6801134294072173141
 GameObject:
   m_ObjectHideFlags: 0
@@ -3535,7 +3529,7 @@ MonoBehaviour:
   GearGrid: {fileID: 4849306991203752202}
   InvSlot: {fileID: 8995890102778140375, guid: 1037c4d38f21c3b4ab6b76001196db16, type: 3}
   InvItemDisplay: {fileID: 7008332004032782911, guid: f1965087c8081d54caa7b5c82046292e, type: 3}
-  weaponIcon: {fileID: 21300000, guid: bc3b9054f2a377d489d4fb54efb5bbcb, type: 3}
+  weaponIcon: {fileID: 21300000, guid: 8b60fbbb62790d24cb855bd9ffab5f40, type: 3}
 --- !u!1 &8933409792517578415
 GameObject:
   m_ObjectHideFlags: 0
@@ -3627,8 +3621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentParent: {fileID: 0}
   inventoryController: {fileID: 0}
-  slot: 0
-  invType: 2
+  slot: {fileID: 0}
 --- !u!1 &8934322750039461118
 GameObject:
   m_ObjectHideFlags: 0

@@ -130,5 +130,10 @@ namespace Scrapyard.services
 
             Log(LogType.ERROR, $"Command {args[0].Trim('\n')} not found");
         }
+
+        public void SciptedCommand(string command)
+        {
+            ExecuteCommand(command);
+        }
     }
 }
