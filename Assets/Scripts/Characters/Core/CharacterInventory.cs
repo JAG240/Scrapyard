@@ -98,12 +98,19 @@ namespace Scrapyard.core.character
                     continue;
                 }
 
-                if (i == 0)
-                    equippedWeapons[i].model.transform.parent = _handPos;
-                else
-                    equippedWeapons[i].model.transform.parent = _holsterPos;
+                Transform holdingPos = equippedWeapons[i].model.GetComponent<WeaponBaseModel>().holdingPosition;
 
-                equippedWeapons[i].model.transform.localPosition = Vector3.zero;
+                if (i == 0)
+                {
+                    equippedWeapons[i].model.transform.parent = _handPos;
+                    equippedWeapons[i].model.transform.localPosition = Vector3.zero - holdingPos.position;
+                }
+                else
+                {
+                    equippedWeapons[i].model.transform.parent = _holsterPos;
+                    equippedWeapons[i].model.transform.localPosition = Vector3.zero;
+                }
+
                 equippedWeapons[i].model.transform.rotation = equippedWeapons[i].model.transform.parent.rotation;
             }
         }

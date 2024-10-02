@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ba275b1e1f09f438faef546c0bddd4, type: 3}
   m_Name: Default Blade
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  <sprite>k__BackingField: {fileID: 0}
   <bluntDamage>k__BackingField: 0
   <sharpDamage>k__BackingField: 0
   <accuracy>k__BackingField: 0
   <reloadSpeed>k__BackingField: 0
   <modSlots>k__BackingField: 0
+  <range>k__BackingField: 0
+  <bulletSpeed>k__BackingField: 5
+  <firerate>k__BackingField: 0
+  <magSize>k__BackingField: 0
   <type>k__BackingField: 2
   <model>k__BackingField: {fileID: 7342256778888124511, guid: 3ea0902d298236c4c82a896aa97dd733, type: 3}
   <baseTypes>k__BackingField: 0000000001000000

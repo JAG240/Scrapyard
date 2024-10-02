@@ -9,6 +9,7 @@ namespace Scrapyard.items.weapons
     public class WeaponBaseModel : MonoBehaviour
     {
         [SerializeField] private List<WeaponModelPositions> partPositions = new List<WeaponModelPositions>();
+        public Transform holdingPosition;
 
         public void EquipPart(GameObject obj, WeaponPartType type)
         {

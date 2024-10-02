@@ -62,7 +62,7 @@ namespace Scrapyard.core.character
         private IEnumerator CommandsAfterStart()
         {
             yield return new WaitForSeconds(0.5f);
-            ServiceLocator.Resolve<Console>().SciptedCommand("player.givedebug.gun");
+            ServiceLocator.Resolve<Console>().SciptedCommand("player.givedebug.melee");
         }
     }
 }

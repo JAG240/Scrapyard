@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f155c812ee25249af0df762f502f61, type: 3}
   m_Name: Default Melee
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  <sprite>k__BackingField: {fileID: 0}
   <bluntDamage>k__BackingField: 0
   <sharpDamage>k__BackingField: 0
   <accuracy>k__BackingField: 0
   <reloadSpeed>k__BackingField: 0
   <modSlots>k__BackingField: 0
   <range>k__BackingField: 0
-  <bulletSpeed>k__BackingField: 0
-  <firerate>k__BackingField: 0
+  <bulletSpeed>k__BackingField: 15
+  <firerate>k__BackingField: 7
+  <magSize>k__BackingField: 0
   <type>k__BackingField: 1
   <baseType>k__BackingField: 0
   <ammoType>k__BackingField: 0
   <model>k__BackingField: {fileID: 4211551774277281977, guid: 801ed5644e6929e4b89ccd242a235f43, type: 3}
+  <fireMode>k__BackingField: 0
