@@ -15,8 +15,8 @@ namespace Scrapyard.items.weapons
         private Vector3 dir;
         private float speed;
         private bool atRange = false;
-        private float sharpDamage;
-        private float bluntDamage;
+        protected float sharpDamage;
+        protected float bluntDamage;
 
         private float maxAccuracy = 10f;
         private float maxSpread = 0.35f;

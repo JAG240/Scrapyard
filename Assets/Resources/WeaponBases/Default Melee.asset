@@ -27,3 +27,4 @@ MonoBehaviour:
   <ammoType>k__BackingField: 0
   <model>k__BackingField: {fileID: 4211551774277281977, guid: 801ed5644e6929e4b89ccd242a235f43, type: 3}
   <fireMode>k__BackingField: 0
+  <playerAnimation>k__BackingField: 1

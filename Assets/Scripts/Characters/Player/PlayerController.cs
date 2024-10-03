@@ -14,6 +14,7 @@ namespace Scrapyard.core.character
         private bool _doding = false;
 
         private CharacterController _characterController;
+        private PlayerAnimationController _playerAnimationController;
 
         private Vector2 _rawMove;
         private Vector2 _controllerMove;
@@ -32,6 +33,7 @@ namespace Scrapyard.core.character
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
+            _playerAnimationController = GetComponent<PlayerAnimationController>();
         }
 
         protected override void Update()
@@ -163,7 +165,14 @@ namespace Scrapyard.core.character
             dir.Normalize();
 
             if (state == 1)
+            {
                 Shoot(weapon, weapon.end.position, dir);
+
+                if (weapon.useAnimation != WeaponUseAnimation.None)
+                    _playerAnimationController.PlayWeaponAnimation(weapon.useAnimation, weapon.firerateTime);
+            }
+
+            //TODO: Handle unshoot for automatic weapons 
         }
 
         public void OnReload()

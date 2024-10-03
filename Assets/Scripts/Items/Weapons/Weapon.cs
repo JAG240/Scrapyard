@@ -20,11 +20,14 @@ namespace Scrapyard.items.weapons
         public bool onCooldown { get; protected set; } = false;
         public bool isReloading { get; protected set; } = false;
         public float reloadTimer { get; private set; } = 0f;
+        public float firerateTime { get; protected set; }
 
         public WeaponBase weaponBase { get; protected set; }
         public GameObject bullet { get; set; }
         public Transform end { get; set; }
         public GameObject model;
+
+        public WeaponUseAnimation useAnimation { get; protected set; }
 
         private float maxFirerate = 10f;
         private float maxFireTime = 2f;
@@ -86,7 +89,6 @@ namespace Scrapyard.items.weapons
             if (onCooldown)
             {
                 cooldownTimer += Time.deltaTime;
-                float firerateTime = CustomFunctions.remap(0f, maxFirerate, maxFireTime, 0f, firerate);
 
                 if (cooldownTimer >= firerateTime)
                 {
@@ -101,6 +103,7 @@ namespace Scrapyard.items.weapons
                 return;
 
             this.weaponBase = weaponBase;
+            useAnimation = weaponBase.playerAnimation;
         }
 
         protected abstract void SetWeaponParts(WeaponPart[] weaponParts);
@@ -108,7 +111,7 @@ namespace Scrapyard.items.weapons
 
         protected void CalcuateStats(WeaponPart[] weaponParts)
         {
-            foreach(KeyValuePair<string, float> prop in weaponBase.GetStats())
+            foreach (KeyValuePair<string, float> prop in weaponBase.GetStats())
             {
                 GetType().GetProperty(prop.Key).SetValue(this, prop.Value);
             }
@@ -121,6 +124,8 @@ namespace Scrapyard.items.weapons
                     GetType().GetProperty(prop.Key).SetValue(this, curPropValue + prop.Value);
                 }
             }
+
+            firerateTime = CustomFunctions.remap(0f, maxFirerate, maxFireTime, 0f, firerate);
         }
     }
 }

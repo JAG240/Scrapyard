@@ -49,12 +49,12 @@ namespace Scrapyard.UI
 
         private void UpdateAmmoCount()
         {
-            if (primary != null)
+            if (primary != null && primary.GetType() != typeof(Melee))
                 primaryAmmo.text = $"{primary.curMag}/{primary.magSize}";
             else
                 primaryAmmo.text = string.Empty;
 
-            if(secondary != null)
+            if(secondary != null && secondary.GetType() != typeof(Melee))
                 secondaryAmmo.text = $"{secondary.curMag}/{secondary.magSize}";
             else
                 secondaryAmmo.text = string.Empty;

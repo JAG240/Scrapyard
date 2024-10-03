@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a4beaa3729df04da4fea11cfcd43eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Registered>k__BackingField: 0
 --- !u!114 &7801963325081701498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,5 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6df57a46f32b2e4d8f20af24b7bc396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Registered>k__BackingField: 0
   characterList:
   - {fileID: 7463925789657964460, guid: 195d0829f40204f428e62bbbfd82b0c1, type: 3}
+  - {fileID: 7463925789657964460, guid: 51ac42438145acd40b903a06adba7862, type: 3}
